@@ -1,13 +1,10 @@
 # Software-Projects-I
 
 Application as a whole:
-	Why - Make it easier to use than VLE's.
-	How - Simpler user interface, expediated by having less functions. Caters to a specific need.
-
 	Why - Allows Smart Searching.
 	How - Adding a link (or set thereof) to find as similar/relevant entries as possible.
 
-	Why - Access bookmarks from anywhere with relative ease (secondary goal).
+	Why - Access bookmarks from anywhere with relative ease.
 	How - Usability/online database
 
 	Why - Expediate collaberation between a group.
