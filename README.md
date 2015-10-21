@@ -1,5 +1,27 @@
 # Software-Projects-I
 
+What we want the software to do.!
+• How we want the software to perform.!
+• A set of specific, clear, unambiguous statements.!
+• For a website...!
+• “Every page should download in less than 5 seconds.”!
+• “It should appeal to teenage girls.”
+
+Requirements are based on a set of needs.
+• What do the users need?!
+• What do the other people involved need?!
+• What do other interacting systems need?!
+• Often a compromise between competing needs.
+
+Gather/analysis data on relevant needs!
+• Turn this into a set of draft requirements!
+• Iterate the requirements, until they are...!
+• Practical and feasible (we can do this)
+• Specific, clear, unambiguous (we’ll know when
+we’re done)!
+• And stable (not going to change)
+
+
 Application as a whole:
 	Why - Allows Smart Searching.
 	How - Adding a link (or set thereof) to find as similar/relevant entries as possible.
