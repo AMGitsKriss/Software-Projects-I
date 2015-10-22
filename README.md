@@ -22,23 +22,23 @@ we’re done)!
 • And stable (not going to change)
 
 
-Application as a whole:
-	Why - Allows Smart Searching.
-	How - Adding a link (or set thereof) to find as similar/relevant entries as possible.
+Things to consider:
 
-	Why - Access bookmarks from anywhere with relative ease.
-	How - Usability/online database
+    Access to links, and adding of links with as few clicks as possible.
+    Probably wouldn't replace a VLE as a source of reading material, but would rather be used by collaborating individuals.
+    Aiming it at individuals and "anyone collaborating on something" is the same as "at students." The only difference is scale of implementation.
+    Would a survey be useful here?
+    Would it be better to investigate how people interact with websites?
+    Would it be better to verbally ask people how they would share links between a group, or save their bookmarks between devices? Why do they do it that way?
 
-	Why - Expediate collaberation between a group.
-	How - By allowing a group list of bookmarks, and suggesting similar content based on that group's existing bookmarks.
+More things to consider:
 
-Smart Searching:
-	Why - 
-	How - A
+    How do we want the software to perform? User experience?
+    User Flow
+    What does the user need? (This list is like a set of requirements)
+    What other platforms can perform this task? (Reddit, Facebook, etc)
+    What are their pitfalls? (E.g Reddit voting system is a hindrance to collaboration. Can't have private subreddits)
 
-Recommendation Feature:
-	Why - To find similar solutions to problems the user(s) has.
-	How - Collecting tags from each bookmark added, such as keywords, suspected topic, site name, date, page author, etc, then processing the information to find potentially similar entries.
 
 
 
