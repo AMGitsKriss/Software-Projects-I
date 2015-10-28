@@ -9,12 +9,16 @@ students that are having the same problems as them or interacting with other stu
 problems that they are having difficulties solving.
 We will be using HTML, CSS, PHP, SQL, JavaScript and Ajax to code the website.
 
+We will be using user centered design meaning we will be looking at the users behaviour and needs, so that our website 
+can be more suited (appealing) to the users. we will be using questionnaires to collect information about what the users
+would like our website to have or not have.
+
 Suggestion:
 Maybe have one or more cookies on the website (To remember specific information about a particular individual).
 The website could also have an option to make posts public.
 
 
-Functional requirements
+Functional requirements:
 •	A live chat where groups can talk to each other 
 •	Users can create groups
 •	users are suggested things by the website 
@@ -23,6 +27,9 @@ Functional requirements
 •	Must have forum where users can have a place to share their ideas
 •	
 
-Non-functional requirements 
+Non-functional requirements: 
 •	Every page should download in less than 5 seconds
-•	
+•
+
+Questions to answer:
+Will the users need a lot of computer experience to navigate around and use the website? 
