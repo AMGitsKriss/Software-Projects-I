@@ -1,0 +1,22 @@
+Background:
+We have decided to build a social networking website where students can make groups and exchange ideas by posting their ideas or based on subjects that they study so as to make finding information as easy as possible.
+Although any one can use the website our main target users will most likely be students.
+One of the reasons we are making this website is because most of the websites that are out there for students to use have poor usability (bad user interface) and this can discourage students from using these types of websites which can help them with their studies and help them further their learning capacity by interacting with other students that are having the same problems as them or interacting with other students that have solutions to problems that they are having difficulties solving.
+We will be using HTML, CSS, PHP, SQL, JavaScript and Ajax to code the website.
+Suggestion:
+Maybe have one or more cookies on the website (To remember specific information about a particular individual).
+The website could also have an option to make posts public.
+
+
+Functional requirements
+•	A live chat where groups can talk to each other 
+•	Users can create groups
+•	users are suggested things by the website 
+•	users are able to access their accounts
+•	records bookmarks
+•	Must have forum where users can have a place to share their ideas
+•	
+
+Non-functional requirements 
+•	Every page should download in less than 5 seconds
+•	
