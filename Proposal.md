@@ -16,7 +16,7 @@ PERSONA GOES IN HERE... PROBABLY... MAYBE... I GUESS....
 ##Ethical audit
 > You should detail any issues of privacy, data protection or intellectual property rights that may arise, and how you will manage them. You should confirm that you will not be working with minors or vulnerable adults.
 
-The only user information that will be saved by the application is a username, password and email address. Passwords will be hashed for security.Items users post will be set to private unless explicitly shared by the user. 
+The only user information that will be saved by the application is a username, password and email address. Passwords and email addresses will be hashed for some basic security, and items users post will be set to private unless explicitly shared by the user. Optimistically, a user should be using a password that is different to their email address's password, and not holding any other information about them, we should be safe not implementing further backend security. That said, we certainly need to further consider what other security measures we can take and whether it's worth taking them. For example, actions like enouraging users to choose a unique password are easy to impliment and should be taken.
 
 ##Design
 > Design concepts, alternatives considered, chosen design.
@@ -24,7 +24,9 @@ The only user information that will be saved by the application is a username, p
 ##Prototyping
 > Describe the prototyping you did, and what you learned from this.
 
-We drew wireframes on a whiteboard and discussed together what should go where and why. We've also started considering how to structure the database tables.
+We drew wireframes on a whiteboard and discussed together what should go where and why. Considering what the users are going to need regularly, we've attempted to lay them out in a way that minimises user clicks, and discussed what features and settings people will need, and how we want to format the navigation system. 
+
+We've also started considering how to structure the database tables.
 
 POSSIBLE TABLE STRUCTURE DIAGRAM HERE
 
@@ -32,8 +34,26 @@ POSSIBLE TABLE STRUCTURE DIAGRAM HERE
 > How you intend to test and evaluate your software during and after development. It may be useful to specify individual test cases.
 
 ##Project management
-> How you will manage the development process: roles, Gantt charts, milestones,
-development methodology etc.
+> How you will manage the development process: roles, Gantt charts, milestones, development methodology etc.
+
+The application will be developed in PHP, alongside a MySQL database. The application will also use some Javascript to supplement it's design; for example hiding an individual entry's settings until the user wants to expand them, while keeping them present in the html source for accessability reasons.
+
+We've started - and will continue to use - a gantt chart to keep track of what we need to do, how we are progressing and when we actually did things, on a week-to-week basis. 
+
+We will also be considering a roadmap, or feature list, of practical things we will need to complete in the application before we can move further down the list. This should allow us to start abstracting our code before we write it, saving us time that we might otherwise spend refactoring our code.
+
+Our key milestones will likely be: producing the minimal functional product (before implemenmting the reccomender system), a minimum viable product that is complete enough for a user to use without guidence, an administration interface and a functional reccomender system.
+
+Kam - Handling most of the record keeping and some planning. Is also handling any surveys we use.
+Kriss - Constructing roadmap and leading backend development.
+Adonay - Building user flow diagrams.
+Pou - 
+Max - 
+Dom - 
+
+General planning, prototyping and development is being, and will be, contributed to by everyone.
+
+PROBLEMS WE'LL FACE
 
 ##Conclusion
 > Summarise your proposal, including the key points from the previous sections.
@@ -44,22 +64,3 @@ development methodology etc.
 ##Appendices
 > The appendix or appendices should contain your group meeting minutes and any
 additional raw material that is referred to in the text (e.g. data from requirements gathering, paper prototypes etc.)
-
-
-
-
-
-
-
-
-### User Scenarios.
-- User flow diagram *(Kriss)*
-- How that would be implemented (PHP, SQL, Javascript, quick outline of functions)
-- Feature List *(Everyone)*
-
-##Targets (Milestones)
-- Problems we might face
-- Activity Diagram
-- Time Estimates *(Kam)*
-- Milestones (Proposal, Minimal Functional Product, Minimal Viable Product, Everyone attending a meeting at once.)
-- Gannt Chart *(Kam)*
