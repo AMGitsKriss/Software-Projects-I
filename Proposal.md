@@ -8,7 +8,6 @@ The website should be able to suggest things to the users based on the tags on t
 
 > Explain the computer science problems presented by your project, satisfying the programme learning outcome “Apply computational thinking to the design and implementation of moderately complex computing systems”.
 
-
 KAM DID A SURVAY RIGHT? WHAT DID WE LEARN FROM WHAT?
 
 PERSONA GOES IN HERE... PROBABLY... MAYBE... I GUESS....
@@ -21,17 +20,31 @@ The only user information that will be saved by the application is a username, p
 ##Design
 > Design concepts, alternatives considered, chosen design.
 
+Kam used powerpoint/keynote to create an interactive prototype (based off of wireframes we created in a meeting) that demonstrates how users will navigate the site.
+
 ##Prototyping
 > Describe the prototyping you did, and what you learned from this.
 
-We drew wireframes on a whiteboard and discussed together what should go where and why. Considering what the users are going to need regularly, we've attempted to lay them out in a way that minimises user clicks, and discussed what features and settings people will need, and how we want to format the navigation system. 
+We drew wireframes on a whiteboard and discussed together what should go where and why. Considering what the users are going to need regularly, we've attempted to lay them out in a way that minimises user clicks, and discussed what features and settings people will need, and how we want to format the navigation system. Kam took this further and used powerpoint/keynote to determine how usable our layout ideas were.
 
 We've also started considering how to structure the database tables.
+
+Kriss's personal bookmarking app has similar functionality to some of the core features we want to implememnt: users can save links to view later. (http://qvvz.uk/)
 
 POSSIBLE TABLE STRUCTURE DIAGRAM HERE
 
 ##Evaluation Plan
 > How you intend to test and evaluate your software during and after development. It may be useful to specify individual test cases.
+
+The following tests are the most likely measure of success, with the aim being for the application to satisfy all of them:
+
+- Test 1: A User A can add a series of links, a number of which are on a single subject. The program should find tags from all included links, and trends should be visible based upon these tags. 
+
+- Test 2: Expanding upon the case of Test 1, except searching for the trends within posts shared to a group, rather than from individual people.
+
+- Test 3: Using the tags from the previous test cases, the system should be able to reccomend a link from the database that is NOT in the user's list.
+
+- Test 4: The search function should accept one or more links, find relevant tags from them, and reccomend another link (that was not in the list er user is searching with) which is similar. 
 
 ##Project management
 > How you will manage the development process: roles, Gantt charts, milestones, development methodology etc.
