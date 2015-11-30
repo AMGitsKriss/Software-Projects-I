@@ -67,6 +67,7 @@ Dom -
 General planning, prototyping and development is being, and will be, contributed to by everyone.
 
 PROBLEMS WE'LL FACE
+The most prominent problem we're likely to encounter is dealing with merge conflicts in Git, as it's something nobody in the group has ever needed to resolve previously. 
 
 ##Conclusion
 > Summarise your proposal, including the key points from the previous sections.
