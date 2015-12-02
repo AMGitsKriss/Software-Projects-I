@@ -10,7 +10,20 @@ The website should be able to suggest things to the users based on the tags on t
 
 KAM DID A SURVAY RIGHT? WHAT DID WE LEARN FROM WHAT?
 
-PERSONA GOES IN HERE... PROBABLY... MAYBE... I GUESS....
+**Bob Richards**
+
+The users of the website will be people like Bob Richards. Bob is studying journalism at university and is in his first year. Bob has always had an interest in journalism, he always keeps up with current affairs with politics (both nationally and world). He mostly use sources like the BBC, Aljazeera, Russian TV and Press TV.
+
+He is a serious surfer of the World Wide Web and is always on the lookout for people that have a real interest in finding out the truth behind stories that are shown on the news, so he can work with them and use them to build his own network of informants for his future career as a journalist. Bob’s aim (goal) for entering university is to finish his degree with a first and enter into the world of journalism working for a legitimate newspaper. He thinks that the news will entirely be distributed online in the near future and newspapers will become completely obsolete and they will have to change their platform to be completely online. Bob has been using his spare time to learn some basic web coding using HTML, CSS and JavaScript so that he will be ready to serve the news on any platform whether it be on paper or online.
+
+Bob usually prefers to stay at home and use the cyber world to interact with people; most of his contacts with people he considers are on the same career path as him is online using websites like Facebook and twitter. Bob sees the internet as the most efficient way of sharing information with an audience and because it has become such a big part of the world we live in now, people who usually would have no interaction with each other let alone know of each other’s existence have become connected through the internet so when it comes to news Bob considers himself as part of the generation with no borders that will make big changes to the world community and how people are treated across the world. A serious advocator of free press in countries he considers are under dictatorship and he has a real disdain towards any form of state controlled media. 
+
+Context scenario:
+Bob gets up at 7:00am makes himself breakfast then checks his emails on his phone and skims through trending topics on tweeter and news sites then packs his laptop in his bag and leaves his house at 8:15. He takes the train to his university, once the lecture starts the lecturer appoints everyone to a group then explains to them their assignment. He exchanges contact numbers with the people in his group and they arrange to meet up every Tuesday to exchange any new ideas or new things they might have discovered.
+
+**Carly Burns**
+
+Carly Burns is a recent graduate who has recently started work with a small I.T company. She is a computer programmer. Carly has always had an interest in birds and is a keen bird watcher, who is always looking for other people who share her hobby to share pictures, facts and other things about birds.
 
 ##Ethical audit
 > You should detail any issues of privacy, data protection or intellectual property rights that may arise, and how you will manage them. You should confirm that you will not be working with minors or vulnerable adults.
