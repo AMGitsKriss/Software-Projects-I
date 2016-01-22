@@ -1,14 +1,13 @@
 <?php
 /*
- *	NOT INTENDED TO BE ACCESSED FROM ANYWHERE ON DIRE
+ *	NOT INTENDED TO BE ACCESSED FROM ANYWHERE ONLINE
  *	DIRECT ACCESS ONLY
- *
- *	Database encoding: utf8_general_ci
  */
 
 	require("db_connect.php");
 
-	$sql = "CREATE TABLE Users (user_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, name VARCHAR(30) NOT NULL, email VARCHAR(100), password VARCHAR(100), reg_date TIMESTAMP);";
+			//Username as primary key prevents duplicates
+	$sql = "CREATE TABLE Users (name VARCHAR(50) NOT NULL PRIMARY KEY, email VARCHAR(100), password VARCHAR(100), reg_date TIMESTAMP);";
 
 	$sql .= "";
 
