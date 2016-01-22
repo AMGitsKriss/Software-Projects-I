@@ -2,6 +2,8 @@
 /*
  *	NOT INTENDED TO BE ACCESSED FROM ANYWHERE ON DIRE
  *	DIRECT ACCESS ONLY
+ *
+ *	Database encoding: utf8_general_ci
  */
 
 	require("db_connect.php");
