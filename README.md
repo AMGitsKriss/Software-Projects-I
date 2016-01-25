@@ -1,5 +1,15 @@
 ##Roadmap
-- Removes echoes from create_user.php
+- "Add link" form
+- Login form
+- Login sessions
+- Login with cookies?
+- Header/navigation bar
+- Display list of user links
+	- Parse links to predict the title
+	- Parse links to try and get keywords
+	- Edit links
+- Create group form
+- Edit group page
 
 ##Done
 - Database Schema
