@@ -3,6 +3,13 @@
 - Login form
 - Login sessions
 - Login with cookies?
+- Index page view switching (Switch Statement)
+	- Landing/Login
+	- Home
+	- Registration
+	- Settings (inc. group edit/making)
+	- Group List
+	- Personal List
 - Header/navigation bar
 - Display list of user links
 	- Parse links to predict the title
@@ -11,7 +18,7 @@
 - Create group form
 - Edit group page
 - HTAccess navigation (allowing /login instead of /?page=login)
-- Index page view switching
+
 
 ##Done
 - Database Schema
