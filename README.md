@@ -22,7 +22,7 @@
 - Tweak create_user.php so errors are displayed on the form, rather than blank page.
 
 ##Handy Functions
-spit( string ); // encases the string in \*<p></p>\* tags then echoes it. Best for tracking errors.
+spit( string ); // encases the string in <p></p> tags then echoes it. Best for tracking errors.
 
 ##Issues
 - "config/install.php" fails to run. For now, use "config/temp.sql" to build database instead.
