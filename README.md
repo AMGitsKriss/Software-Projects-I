@@ -10,6 +10,8 @@
 	- Edit links
 - Create group form
 - Edit group page
+- HTAccess navigation (allowing /login instead of /?page=login)
+- Index page view switching
 
 ##Done
 - Database Schema
