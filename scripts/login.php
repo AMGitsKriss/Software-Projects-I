@@ -40,37 +40,20 @@ $content .= $form_html;
 
 // ------- START form processing code... -------
 
-function clean_input($data) {
-  $data = trim($data); // strips unnecessary characters from beginning/end
-  $data = stripslashes($data); // remove backslashes
-  $data = htmlspecialchars($data); // replace special characters with HTML entities
-  return $data;
-}
-
 // define variables and set to empty values
 $username =$password = "";
 
 // check if there was a POST request
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	// validate the form data
-	if (empty($_POST["username"])) 
+	if (empty($_POST["username"]) && empty($_POST["password"])) 
 	{
-   	 	$username = "username is required";
+   	 
   	} 
-	else 
+	else if (!empty($_POST["username"]) && !empty($_POST["password"]))
 	{
     		$username = $_POST["username"];
-  	}
-	
-	if (empty($_POST["password"])) 
-	{
-   	 	$password = "password is required";
-  	} 
-	else 
-	{
-    		$password = $_POST["password"];
-	}
-	
+		$password = $_POST["password"];
 	
 	$select = "SELECT * FROM customer WHERE username = '$username' && password = '$password'";
 	$squery = mysqli_query($link, $select);
@@ -83,10 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 	else 
 	{
-		echo mysqli_error($link);
-		echo ("wrong username or password");
-	}
-	
+
 	$select2 = "SELECT * FROM adminLogin WHERE username = '$username' && password = '$password'";
 	$squery2 = mysqli_query($link, $select2);
 	$check_user2 = mysqli_num_rows($squery2);
@@ -101,8 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	{
 		echo mysqli_error($link);
 		echo ("wrong username or password");
-	}
-
+	}}
+}
 
 }
 
