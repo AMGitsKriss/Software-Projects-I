@@ -5,6 +5,21 @@
 	require("functions.php");
 	require("config/db_connect.php");
 	include("templates/register.html");
+	include('templates/navigation.html');
+	
+if (!isset($_GET['page'])) {
+    $page_id = 'home'; // display home page
+} else {
+    $page_id = $_GET['page']; // else requested page
+}
+
+switch ($page_id) {
+case 'logIn' :
+	include 'logIn.php';
+	break;
+default :
+	include 'views/404.php';
+}
 
 
 if (!isset($_GET['page'])) 
