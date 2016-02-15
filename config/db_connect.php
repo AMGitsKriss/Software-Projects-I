@@ -1,10 +1,10 @@
 <?php
 
 $conn = mysqli_connect(
-	"localhost", //server
-	"username", //username 
-	"password", //password
-	"db_name" //database name
+	"qvvz.uk", //server
+	"software", //username 
+	"projects", //password
+	"software" //database name
 );
 
 if(mysqli_connect_errno()){

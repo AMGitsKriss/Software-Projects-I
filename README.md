@@ -33,3 +33,6 @@ spit( string ); // encases the string in paragraph tags then echoes it. Best for
 
 ##Issues
 - "config/install.php" fails to run. For now, use "config/temp.sql" to build database instead.
+
+## Important Variable Names
+- $conn = Database connection

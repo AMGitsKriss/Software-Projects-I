@@ -1,5 +1,5 @@
 <?php 
-	//TODO - ADD EMAIL FIELD TO THE ABOVE FORM
+	//TODO - Merge this with register.html in a view/register.php file.
 
 	error_reporting(E_ALL);
 	ini_set('display_errors', true);
@@ -41,14 +41,14 @@
 				die("Password must be 72 characters or less.");
 			}
 			
-			$email = $hasher->HashPassword($email);
 			$password = $hasher->HashPassword($password);
+
 			//Minimum hash length is 20 characters. If less, something's broken.
 			if(strlen($password) >= 20 ){	
 				//Hashing has worked.
 				//Add the entry and go to the login page.
 				$sql = "INSERT INTO Users (name, password, email) VALUES ('$username', '$password', '$email')";
-				$query = $conn->query($sql);
+				$query = mysqli_query($conn, $sql);
 				if(!$query){
 					echo $conn->error;
 					
@@ -58,12 +58,12 @@
 				}
 			} 
 			//Found that username already
-			else if(checkUsername($username, $conn)){ //Username exists
+			else if(checkUsername($username)){ //Username exists
 				$report .= "<p>That username is already in use.</p>";
 				echo $report;
 			}
 			//Email already exists
-			else if(checkEmail($email, $conn)){ //Username exists
+			else if(checkEmail($email)){ //User has account
 				$report .= "<p>That email is already in use.</p>";
 				echo $report;
 			}
