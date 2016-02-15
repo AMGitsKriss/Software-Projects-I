@@ -23,16 +23,16 @@
 	// define variables and set to empty values
 	$username = $password = "";
 
+	//TODO Adonay/Kriss - Check to see if the user has a permission level of 1. If so, show them the admin UI.
+
 	// check if there was a POST request
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		
-		//TODO Adonay/Kriss - Chack to see if the user has a permission level of 1. If so, show them the admin UI.
 		//create the hasher
 		require("../libs/PasswordHash.php");
 		$hasher = new PasswordHash(8, false);
 		//CheckPassword($password, $stored_hash) this retruns true when the passwords are the same.
-		//TODO - This is going to require the script to get the password from the server, rather than just using
-		//an sql statement.
+		//TODO Kriss/Adonay - This is going to require the script to get the password from the server, rather than just using
+		//an sql statement. THEN if checkPassword() returns true, it logs in.
 
 
 		// validate the form data
