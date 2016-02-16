@@ -23,6 +23,9 @@
 	    $page_id = $_GET['page'];
 	}
 
+	//TODO Kam? - Refactor this to use a "buildNavigation(bool loggedIn)" function. 
+	//Should return a interactive version of navigation when handed false. 
+	//Possible 2D array for navigation structure - Means changes only have to be made in one place.
 	if (isset($_SESSION['login']) && $_SESSION["login"]=='true')
 	{
 		include('templates/navigation.html');
