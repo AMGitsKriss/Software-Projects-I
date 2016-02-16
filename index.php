@@ -8,6 +8,7 @@
 	include("templates/header.html");
 
 	spit("This is a Spit()");
+	session_start();
 
 	//Declare this now
 	$output = "";
@@ -28,26 +29,20 @@
 	//Possible 2D array for navigation structure - Means changes only have to be made in one place.
 	if (isset($_SESSION['login']) && $_SESSION["login"]=='true')
 	{
-		include('templates/navigation.html');
+		$output .= file_get_contents('templates/navigation.html');
 	}
 	else {
-		include('templates/navigation-signed-out.html');
+		$output .= file_get_contents('templates/navigation-signed-out.html');
 	}
 
 	if(isset($_SESSION['admin']))
 	{
-	include('templates/adminNavigation.html');
+	$output .= file_get_contents('templates/adminNavigation.html');
 	}
 	//If not logged in
 	if(!isset($_SESSION['login'])){
-		//Stuff that anyone can do while signed out
-		if($page_id == "register"){
-			//Do nothing, they can continue there
-		}
-		else{
-			//Otherwise send them to the login screen.
-			$page_id = 'login';
-		}
+		//Send them straight to the login/register screen
+		$page_id = 'login';
 	}
 
 
@@ -58,11 +53,8 @@
 	case 'home' :
 	    include 'views/home.php';
 	    break;
-	case 'register':
-		//TODO Kriss - Fix this. The form can go into the php file
-		include 'templates/register.html';
-		break;
 	case 'login':
+		//Contains both the login and registration content
 		include 'views/login.php';
 		break;
 	case 'logout' :
@@ -76,5 +68,12 @@
 
 
 	mysqli_close($conn);
-	include("templates/footer.html"); //closing html tags
+	
+	//Add footer to the page
+	$output .= file_get_contents("templates/footer.html"); //closing html tags
+	
+	//Every time 'var_host' appears in the html, it's replaces with $host.
+	//Allows for more elegant navigation.
+	$output = str_replace("var_host", $host, $output);
+	echo $output;
 ?>

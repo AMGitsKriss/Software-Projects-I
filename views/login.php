@@ -1,22 +1,14 @@
 <?php
 
 	/*
-	 *	Adonay - Could you please indent/format appropriately in future. Makes it easier to read.
+	 *	This file contains the login script, and displays both the login and registration forms.
+	 *	If a new user is created, it calls that script via POST astion.
 	 */
 
-	$output .= "<h1>login</h1>";
-
-	//Login form
-	$form_html = "<form action='/login' method='POST'>
-			<label for='username'>Username:</label>
-			<input type='text' name='username'/>
-			<label for='password'>Password:</label>
-			<input type='password' name='password' />
-			<button type='submit'>Login</button>
-				</form><p><a href='/register'>Register now.</a></p>";
-	                   	
-	// append form HTML to content string
-	$output .= $form_html;
+	//Add login and registration divs to output
+	//TODO - Make these windows show side-by-side with CSS
+	$output .= file_get_contents('templates/login.html');
+	$output .= file_get_contents('templates/register.html');
 
 	// ------- START form processing code... -------
 
@@ -28,12 +20,8 @@
 	// check if there was a POST request
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		//create the hasher
-		require("../libs/PasswordHash.php");
+		require("libs/PasswordHash.php");
 		$hasher = new PasswordHash(8, false);
-		//CheckPassword($password, $stored_hash) this retruns true when the passwords are the same.
-		//TODO Kriss/Adonay - This is going to require the script to get the password from the server, rather than just using
-		//an sql statement. THEN if checkPassword() returns true, it logs in.
-
 
 		// validate the form data
 		if (empty($_POST["username"]) || empty($_POST["password"])) {
@@ -45,20 +33,38 @@
 	    	$username = $_POST["username"];
 			$password = $_POST["password"];
 			
-			$select = "SELECT * FROM users WHERE username = '$username' && password = '$password'";
-			$squery = mysqli_query($conn, $select);
-			$check_user = mysqli_num_rows($squery);
+			//Username is key value. Can only be one.
+			$select = "SELECT * FROM users WHERE name = '$username'";
+			$result = mysqli_query($conn, $select);
 
-			//If there is a matching user
-		 	if($check_user > 0)
+			if($result == false){
+				spit("User not found.");
+				$saved_username = "";
+				$hashed_pass = "";
+				$check_user = 0;
+			}
+			else{
+				//get row data, then remember the password for comparison
+				while($row = mysqli_fetch_assoc($result)){
+					$saved_username = $row['name'];
+					$hashed_pass = $row['password'];
+					$check_user = mysqli_num_rows($result);
+				}
+			}
+
+			//If there is 1 matching user (which there should be) and the password check returns true...
+		 	if($check_user == 1 && $hasher->CheckPassword($password, $hashed_pass))
 		 	{
+		 		//Login
 		 		$_SESSION["login"] = "true";
+		 		$_SESSION["username"] = $saved_username;
 				header('Location: /');
+			}
+			else{
+				spit("Login failed.");
 			}
 
 		// ------- END form processing code... -------
 		}
 	}
-	// output the html
-	echo($output);
 ?>

@@ -30,6 +30,7 @@
 
 ##Handy Functions
 spit( string ); // encases the string in paragraph tags then echoes it. Best for tracking errors.
+$output .= file_get_contents("some.html"); // adds the html to the output varable.
 
 ##Issues
 - "config/install.php" fails to run. For now, use "config/temp.sql" to build database instead.
