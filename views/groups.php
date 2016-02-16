@@ -1,6 +1,6 @@
 <?php
 
-$content = "<h1 style=\"color:#8b8989;margin-left:45%; font:40px arial, sans-serif;\">Groups</h1>";
+$output .= "<h1 style=\"color:#8b8989;margin-left:45%; font:40px arial, sans-serif;\">Groups</h1>";
 
 $sql = "SELECT postid, groupid FROM GroupPosts
 	ORDER BY groupid";
@@ -13,24 +13,24 @@ if ($result === false)
 	$num_rows = mysqli_num_rows($result);
 	if ($num_rows > 0)
 	{
-	    	$content .= "<table border='1'>";
-	    	$content .= "<thead><tr><th>Group</th><th>Post</th></tr></thead>";
-	    	$content .= "<tbody>";
+	    	$output .= "<table border='1'>";
+	    	$output .= "<thead><tr><th>Group</th><th>Post</th></tr></thead>";
+	    	$output .= "<tbody>";
 
 	    	while ($row = mysqli_fetch_assoc($result)) {
-			$content .= "<tr>";
-			$content .= "<td><a href=\"?page=groupid=".$row['groupid']."\">".$row['groupid']."</a></td>";
-			$content .= "<td>".$row['postid']."</td>";
-			$content .= "</tr>";
+			$output .= "<tr>";
+			$output .= "<td><a href=\"?page=groupid=".$row['groupid']."\">".$row['groupid']."</a></td>";
+			$output .= "<td>".$row['postid']."</td>";
+			$output .= "</tr>";
 		}
-		$content .= "</tbody></table>";
+		$output .= "</tbody></table>";
 	} else {
-		$content .= "<p>There are no posts to display.</p>";
+		$output .= "<p>There are no posts to display.</p>";
 	}
 
 	mysqli_free_result($result);
 }
 
-echo $content;
+echo $output;
 
 ?>

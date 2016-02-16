@@ -1,4 +1,6 @@
 <?php 
+
+//TODO - The views i nhere need adding to the main index page.
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 

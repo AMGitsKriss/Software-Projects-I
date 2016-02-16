@@ -9,6 +9,8 @@
 
 	spit("This is a Spit()");
 
+	//Declare this now
+	$output = "";
 //-----------------------------------------------
 	//TODO - I have no idea what's going on here. 
 	// If no page, go to home page, then if they're logged in include navigation? Then if not logged in go to login.php?
@@ -24,6 +26,9 @@
 	if (isset($_SESSION['login']) && $_SESSION["login"]=='true')
 	{
 		include('templates/navigation.html');
+	}
+	else {
+		include('templates/navigation-signed-out.html');
 	}
 
 	if(isset($_SESSION['admin']))
@@ -57,7 +62,7 @@
 	case 'login':
 		include 'views/login.php';
 		break;
-	case 'log-out' :
+	case 'logout' :
 	 include 'views/logout.php';
 	    break;
 	default :

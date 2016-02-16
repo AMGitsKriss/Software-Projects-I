@@ -4,7 +4,7 @@
 	 *	Adonay - Could you please indent/format appropriately in future. Makes it easier to read.
 	 */
 
-	$content = "<h1>login</h1>";
+	$output .= "<h1>login</h1>";
 
 	//Login form
 	$form_html = "<form action='/login' method='POST'>
@@ -16,7 +16,7 @@
 				</form><p><a href='/register'>Register now.</a></p>";
 	                   	
 	// append form HTML to content string
-	$content .= $form_html;
+	$output .= $form_html;
 
 	// ------- START form processing code... -------
 
@@ -60,5 +60,5 @@
 		}
 	}
 	// output the html
-	echo($content);
+	echo($output);
 ?>

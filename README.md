@@ -36,3 +36,4 @@ spit( string ); // encases the string in paragraph tags then echoes it. Best for
 
 ## Important Variable Names
 - $conn = Database connection
+- $output - Added/declared in index.php. This is going to contain most of the page's HTML, so don't re-declare in view files.
