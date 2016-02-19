@@ -76,11 +76,32 @@
 		$sql = "INSERT INTO GroupMembers (groupid, userid) VALUES ('$group', '$username')";
 		$query = mysqli_query($conn, $sql);
 		if(!$query){ //Unsuccessful
-			echo $conn->error;	
+			echo mysqli_error($conn);
 			return false;
 		}
 		else { //Successful
 			return true;
 		}
+	}
+
+	function removeFromGroup($group, $username){
+		global $conn;
+		//Add $username to $group via GroupMembers table
+		$sql = "DELETE FROM GroupMembers WHERE groupid='$group' AND userid='$username'";
+		$query = mysqli_query($conn, $sql);
+		if(!$query){ //Unsuccessful
+			echo mysqli_error($conn);
+			return false;
+		}
+		else { //Successful
+			return true;
+		}
+	}
+
+	function getGroupOwner($group){
+		global $conn;
+		$sql = "SELECT owner FROM Groups WHERE name='$group'";
+		$result = mysqli_query($conn, $sql);
+		return $result['owner'];
 	}
 ?>
