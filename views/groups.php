@@ -52,6 +52,31 @@
 		}
 	}
 
+	//If the user has clicked the leave group option.
+	if(isset($_POST['leave-group'])){
+		//Owner tries to leave.
+		if($_SESSION['username'] == getGroupOwner($group) && isset($_POST['new-owner'])){
+			//Change the owner
+			$new_owner = $_POST['new-owner'];
+			$username = $_SESSION['username'];
+			$sql = "UPDATE Groups SET owner='$new_owner' WHERE owner='$username'";
+			mysqli_query($conn, $sql);
+			//Leave the group.
+			$sql = "DELETE FROM GroupMembers WHERE userid='$username' AND groupid='$group'";
+			mysqli_query($conn, $sql);
+		}
+		//User tried to leave
+		else if($_SESSION['username'] != getGroupOwner($group)){
+			//Just leave the group
+			$sql = "DELETE FROM GroupMembers WHERE userid='$username' AND groupid='$group'";
+			mysqli_query($conn, $sql);
+		}
+		//Fail
+		else{
+			spit("Error: Could not remove " . $_SESSION['username'] . "From the group " . $group . ".");
+		}
+	}
+
 	if(isset($_GET['group'])){
 		$group = $_GET['group']; 
 
@@ -72,18 +97,34 @@
 			if(checkGroupPrivate($group)){
 				$output .= file_get_contents("templates/add-remove-users.html");
 			}
+			$output .= "<form name='leave-group' method'post' action'var_host/groups'><label>Set new group admin:</label><input type='text' name='new-owner'><input type='submit' text='Leave Group'></form>";
 		}
-		//Everyone then sees...
-		//TODO - add a "leave" user dialogue here.			
+		else {
+			//Everyone else then sees...
+			$output .= "<form name='leave-group' method'post' action'var_host/groups'><input type='submit' text='Leave Group'></form>";
+		}
 		//TODO - List all of the group's posts
+			//Can't be done until Dom's part's finished.
 	}
 	else{
 		//TODO - List all of the groups the user is a member of.
 		if($_SESSION['admin']){
 			//Get ALL groups
+			$sql = "SELECT * FROM Groups";
 		}
 		else {
 			//Searched based on usename
+			$username = $_SESSION['username'];
+			$sql = "SELECT * FROM GroupsMembers where userid='$username'";
+			//Select everything from groups where userid in GroupMember is paired with that groupid.
+		}
+		$result = mysqli_query($conn, $sql);
+		if($result === TRUE){
+			while($row = mysqli_fetch_assoc($result)){
+				//Creating the table entries for each group
+				$temp = $row['groupid'];
+				$output .= "<p><a href='var_host/groups?group='" . $temp . ">" . $temp . "</a></p>;
+			}
 		}
 	}
 ?>

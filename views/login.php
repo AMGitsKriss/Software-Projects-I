@@ -49,6 +49,7 @@
 					$saved_username = $row['name'];
 					$hashed_pass = $row['password'];
 					$check_user = mysqli_num_rows($result);
+					$permission = $row['permissions'];
 				}
 			}
 
@@ -58,6 +59,7 @@
 		 		//Login
 		 		$_SESSION["login"] = "true";
 		 		$_SESSION["username"] = $saved_username;
+		 		$_SESSION["admin"] = ($permission == 0) ? FALSE : TRUE;
 				header('Location: /');
 			}
 			else{
