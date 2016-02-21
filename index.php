@@ -58,12 +58,16 @@
 		include 'views/login.php';
 		break;
 	case 'logout' :
-	 include 'views/logout.php';
+		//include 'views/logout.php';
+		session_destroy();
+		header('location: ' . $host);
 	    break;
+	  case 'groups' :
+	  	include 'views/groups.php';
+	  	break;
 	default :
-		//TODO - Should this be 404? Would it make more sense to
-		//redirect the user to the root "/" directory? Thus getting rid of any place.com/whatever url?
 	    include 'views/404.php';
+	    break;
 	}
 
 

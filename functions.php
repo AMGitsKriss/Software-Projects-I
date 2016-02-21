@@ -59,15 +59,16 @@
 	function checkGroupPrivate($group){
 		global $conn;
 		//Checking if that group exists already
-		$sql = "SELECT private FROM Groups WHERE name='$name'";
-		$query = mysqli_query($conn, $sql);
+		$sql = "SELECT private FROM Groups WHERE name='$group'";
+		$result = mysqli_query($conn, $sql);
 		//If so, there will be a result
-		if(mysqli_num_rows($result) = 1){
-			$private = $result['private'];
+		$row = mysqli_fetch_assoc($result);
+		if(mysqli_num_rows($result) == 1){
+			$private = $row['private'];
 			if($private != 0)	return true;
 			else 				return false;
-		else 		return null;
 		}
+		else 		return null;
 	}
 
 	function addToGroup($group, $username){
@@ -102,6 +103,7 @@
 		global $conn;
 		$sql = "SELECT owner FROM Groups WHERE name='$group'";
 		$result = mysqli_query($conn, $sql);
-		return $result['owner'];
+		$row = mysqli_fetch_assoc($result);
+		return $row['owner'];
 	}
 ?>

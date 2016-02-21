@@ -57,10 +57,10 @@
 		 	if($check_user == 1 && $hasher->CheckPassword($password, $hashed_pass))
 		 	{
 		 		//Login
-		 		$_SESSION["login"] = "true";
-		 		$_SESSION["username"] = $saved_username;
-		 		$_SESSION["admin"] = ($permission == 0) ? FALSE : TRUE;
-				header('Location: /');
+		 		$_SESSION['login'] = "true";
+		 		$_SESSION['username'] = $saved_username;
+		 		$_SESSION['admin'] = ($permission == 0) ? FALSE : TRUE;
+				header('Location: '.$host);
 			}
 			else{
 				spit("Login failed.");

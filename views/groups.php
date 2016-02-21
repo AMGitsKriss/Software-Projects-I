@@ -16,18 +16,23 @@
 	$output .= file_get_contents("templates/new-group.html");
 
 	if(isset($_POST['create-group'])){
-		$new_group = mysqli_real_escape_string($_POST['new-group']);
+		$new_group = mysqli_real_escape_string($conn, $_POST['new-group']);
 		//If the group doesn't exist yet...
 		if(!checkGroup($new_group)){
 			$private = isset($_POST['private']);
+			//If $private is 1 (true) leave it as 1, else set to 0 (false).
+			$private = ($private == 1) ? 1 : 0;
+			spit($private);
 			$username = $_SESSION['username'];
 			$sql = "INSERT INTO Groups (name, private, owner) VALUES ('$new_group', '$private', '$username')";
 			$result = mysqli_query($conn, $sql);
 			if($result){
+				spit("A");
 				addtoGroup($new_group, $username);
 				$output .= "<p>Group created successfully.</p>";
 			}
 			else {
+				spit("B");
 				$output .= "<p>" . mysqli_error($conn) . "</p>";
 			}
 		}
@@ -37,7 +42,7 @@
 		}
 	}
 	else if(isset($_POST['join-group'])){
-		$join_group = mysqli_real_escape_string($_POST['new-group']);
+		$join_group = mysqli_real_escape_string($_POST['join-group']);
 		//If the group ISN'T private...
 		if(checkGroupPrivate($new_group) == FALSE){
 			addtoGroup($new_group, $username);
@@ -79,7 +84,6 @@
 
 	if(isset($_GET['group'])){
 		$group = $_GET['group']; 
-
 		//If submitted by group owner
 		if($_SESSION['username'] == getGroupOwner($group)){
 			//Add a user
@@ -104,13 +108,14 @@
 			$output .= "<form name='leave-group' method'post' action'var_host/groups'><input type='submit' text='Leave Group'></form>";
 		}
 		//TODO - List all of the group's posts
+			spit("Results will go here.");
 			//Can't be done until Dom's part's finished.
 	}
 	else{
 		//TODO - List all of the groups the user is a member of.
 		if($_SESSION['admin']){
 			//Get ALL groups
-			$sql = "SELECT * FROM Groups";
+			$sql = "SELECT DISTINCT * FROM GroupMembers";
 		}
 		else {
 			//Searched based on usename
@@ -119,11 +124,14 @@
 			//Select everything from groups where userid in GroupMember is paired with that groupid.
 		}
 		$result = mysqli_query($conn, $sql);
-		if($result === TRUE){
+		if($result === FALSE){
+			//Oops
+		}
+		else {
 			while($row = mysqli_fetch_assoc($result)){
 				//Creating the table entries for each group
 				$temp = $row['groupid'];
-				$output .= "<p><a href='var_host/groups?group='" . $temp . ">" . $temp . "</a></p>;
+				$output .= "<p><a href='var_host/groups?group=" . $temp . "'>" . $temp . " | " . $row['userid'] . "</a></p>";
 			}
 		}
 	}
