@@ -2,18 +2,14 @@
 - "Add link" form
 - Login with cookies?
 - Index page view switching (Switch Statement)
-	- Landing/Login
 	- Home
-	- Registration
 	- Settings (inc. group edit/making)
-	- Group List
+	- Group List (Kriss is working on)
 	- Personal List
 - Display list of user links
 	- Parse links to predict the title
 	- Parse links to try and get keywords
 	- Edit links
-- Create group form
-- Edit group page
 
 
 ##Done
@@ -27,6 +23,9 @@
 - Login sessions
 - Header/navigation bar
 - HTAccess navigation (allowing /login instead of /?page=login)
+- Index View switching
+	- Landing/Login/Registration
+- Group Management
 
 ##Handy Functions
 spit( string ); // encases the string in paragraph tags then echoes it. Best for tracking errors.
