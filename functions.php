@@ -106,4 +106,19 @@
 		$row = mysqli_fetch_assoc($result);
 		return $row['owner'];
 	}
+
+	function getEntries($name, $everything = false){
+		// $name - Username or Group name to get results for
+		// $everything - Boolean. If true, get all the things a username is related to (their posts and group posts)
+						//False by default
+						//If false, only get their person items.
+						//Only applies to usernames.
+
+		//Search for posts with an owner of $name
+			//If results && $everything
+				//Get all of those posts, and all posts from groups user is in
+			//If results && !everything
+				//Get user's owned posts exclusively.
+			//Else search for posts where $name is the group.
+	}
 ?>
