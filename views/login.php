@@ -37,11 +37,11 @@
 			$select = "SELECT * FROM users WHERE name = '$username'";
 			$result = mysqli_query($conn, $select);
 
+			$check_user = 0;
 			if($result == false){
 				spit("User not found.");
 				$saved_username = "";
 				$hashed_pass = "";
-				$check_user = 0;
 			}
 			else{
 				//get row data, then remember the password for comparison
