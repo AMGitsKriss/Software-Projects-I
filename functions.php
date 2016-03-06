@@ -108,6 +108,7 @@
 	}
 
 	function getEntries($name, $everything = false){
+		global $conn;
 		// $name - Username or Group name to get results for
 		// $everything - Boolean. If true, get all the things a username is related to (their posts and group posts)
 						//False by default
@@ -115,10 +116,27 @@
 						//Only applies to usernames.
 
 		//Search for posts with an owner of $name
-			//If results && $everything
-				//Get all of those posts, and all posts from groups user is in
-			//If results && !everything
-				//Get user's owned posts exclusively.
-			//Else search for posts where $name is the group.
+		$sqlUserCheck = "SELECT * FROM Users WHERE userid='$name'";
+		//Check how many rows there are. There should be 1. 
+		//If one result, $userExists is true. Else false.
+
+		//If results && $everything
+		if($userExists && $everything){
+			//Get all of the groups a user is in, and search all posts from that user, or that group.
+			$sql1 = "SELECT * FROM GroupMembers where userid='$name'";
+			//Put 'groupid' into list $memberOf
+			//Search for each post made by the user, or ascociated with a joined group
+			$sql2 = "SELECT * FROM Posts INNER JOIN GroupPosts WHERE owner='$name' OR groupid='$memberOf'";
+				//Get groups that the user is a member of and search them.
+		}
+		else if($userExists && $everything){
+		//If results && !everything
+			//Get user's owned posts exclusively.
+			$sql3 = "SELECT * FROM Posts WHERE owner='$name'";
+		}
+		else{
+			//Search for posts where $name is the group.
+			$sql4 = "SELECT * FROM Posts WHERE GroupPosts.groupid='$name'";
+		}
 	}
 ?>
