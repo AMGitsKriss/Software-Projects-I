@@ -45,4 +45,10 @@
 		}
 	}
 
+	//Printing entries
+	$temp = getEntries($username, false);
+	foreach($temp as $row){
+		$output .= "<p>" . $row['name'] . " : " . $row['url'] . "</p>";
+	}
+
 ?>

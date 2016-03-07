@@ -109,19 +109,23 @@
 
 	function getEntries($name, $everything = false){
 		global $conn;
-		// $name - Username or Group name to get results for
-		// $everything - Boolean. If true, get all the things a username is related to (their posts and group posts)
-						//False by default
-						//If false, only get their person items.
-						//Only applies to usernames.
+		$results = [];
 
 		//Search for posts with an owner of $name
-		$sqlUserCheck = "SELECT * FROM Users WHERE userid='$name'";
+		$sqlUserCheck = "SELECT * FROM Users WHERE name='$name'";
+		$query = mysqli_query($conn, $sqlUserCheck);
 		//Check how many rows there are. There should be 1. 
 		//If one result, $userExists is true. Else false.
+		if(mysqli_num_rows($query) == 1 && mysqli_fetch_assoc($query)['name'] == $name){
+			$userExists = true;
+		}
+		else {
+			$userExists = false;
+		}
 
-		//If results && $everything
+		//If results && $everything wanted
 		if($userExists && $everything){
+			//TODO
 			//Get all of the groups a user is in, and search all posts from that user, or that group.
 			$sql1 = "SELECT * FROM GroupMembers where userid='$name'";
 			//Put 'groupid' into list $memberOf
@@ -129,15 +133,25 @@
 			$sql2 = "SELECT * FROM Posts INNER JOIN GroupPosts WHERE owner='$name' OR groupid='$memberOf'";
 				//Get groups that the user is a member of and search them.
 		}
-		else if($userExists && $everything){
+
 		//If results && !everything
+		else if($userExists && !$everything){
 			//Get user's owned posts exclusively.
 			$sql3 = "SELECT * FROM Posts WHERE owner='$name'";
+			$query = mysqli_query($conn, $sql3);
+			while($row = mysqli_fetch_assoc($query)){
+				$temp = ["id" => $row['postid'], "added" => $row['added'], "name" => $row['name'], "url" => $row['url'], "owner" => $row['owner']];
+				array_push($results, $temp);
+			}
 		}
+
+		//Otherwise, assume $name is a group
 		else{
-			//Search for posts where $name is the group.
+			//TODO - Search for posts where $name is the group.
 			$sql4 = "SELECT * FROM Posts WHERE GroupPosts.groupid='$name'";
 		}
+
+		return $results;
 	}
 
 	function getNavBar(){
