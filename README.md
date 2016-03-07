@@ -3,6 +3,11 @@
 - Login with cookies?
 - Settings (inc. group edit/making)
 - Edit links
+	- Update Form
+	- Javascript to show/hide update form
+	- update function
+	- delete post
+	- remove  from group
 - Password Recovery
 - EULA Support
 - Masthead? 
