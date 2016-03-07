@@ -146,33 +146,55 @@
 
 	function getPostForm(){
 		global $conn;
+		global $host;
+		
+		$username = $_SESSION['username'];
+
 		$sql = "SELECT * from GroupMembers WHERE userid='$username'";
 		$query = mysqli_query($conn, $sql);
 
 		//Initialise "post to.." with username
-		$postTo = [["U:", $_SESSION['username']]];
+		$postTo = [["U:", $username]];
 
 		//Get the names of user's groups. Add them to the postable list.
-		while($row = mysqli_fetch_assoc($result)){
+		while($row = mysqli_fetch_assoc($query)){
 			array_push($postTo, ["G:", $row['groupid']]);
 		}
 
-		//The title andlink fields.
-		$html = "<div class='post'><p><input type='text' name='title' placeholder='Post Title (Optional)'>
-				<input type='text' name='title' placeholder='Post URL'>";
+		//The title and link fields.
+		$html = "<div class='post'>\n<form action='' method='post'>\n<p><input type='text' name='title' placeholder='Post Title (Optional)'>\n<input type='text' name='url' placeholder='Post URL'>\n";
 
-		//TODO - Generate an option list with the post destinations.
-		$html .= "<select>";
+		//Generate an option list with the post destinations.
+		$html .= "<select name='postTo'>\n";
 		foreach($postTo as $option){
-			$html .= "<option value='$option'>$option</option>";
+			$html .= "<option value='$option[1]'>$option[0]$option[1] </option>\n";
 		}
-		$html .= "</select>";
+		$html .= "</select>\n";
 
-		//TODO - "Post to.." options menu. (GET username and "SELECT groupid where userid=username")
-		
 		//Submit button
-		$html .= "<input type='submit' name='postlink' value='Post'>";
+		$html .= "<input type='submit' name='postlink' value='Post'>\n</p>\n</form>\n</div>\n";
 
 		return $html;
+	}
+
+	function getPageTitle($url){
+		//Getting the contents of the target page
+		$temp = curl_init();
+		curl_setopt($temp, CURLOPT_HEADER, 0);
+		curl_setopt($temp, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($temp, CURLOPT_URL, $url);
+		curl_setopt($temp, CURLOPT_FOLLOWLOCATION, 1);
+		$data = curl_exec($temp);
+		curl_close($temp);
+
+		//Create 
+		$dom = new DOMDocument();
+		//Load the page, supressing it's errors
+		@$dom->loadHTML($data);
+		//Get title tags.
+		$title = $dom->getElementsByTagName('title');
+		//Strip the title data from the object.
+		$title = $title->item(0)->nodeValue;
+		return $title;
 	}
 ?>

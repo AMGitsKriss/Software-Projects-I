@@ -45,6 +45,8 @@
 		$page_id = 'login';
 	}
 
+	//We'll be using this a lot
+	$username = $_SESSION['username'];
 
 //-----------------------------------------------
 

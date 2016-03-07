@@ -1,11 +1,11 @@
 <?php
 
-$host = "http://k-jessop.co.uk/soft";
+$host = "http://orion/soft";
 
 $conn = mysqli_connect(
-	"orion", //server
+	"localhost", //server
 	"root", //username 
-	"f7a7f0658a", //password
+	"findME156442", //password
 	"software" //database name
 );
 
