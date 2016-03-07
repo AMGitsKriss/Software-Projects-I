@@ -1,16 +1,14 @@
 ##Roadmap
-- "Add link" form
-- Login with cookies?
-- Index page view switching (Switch Statement)
-	- Home
-	- Settings (inc. group edit/making)
-	- Group List (Kriss is working on)
-	- Personal List
-- Display list of user links
-	- Parse links to predict the title
-	- Parse links to try and get keywords
-	- Edit links
 
+- Login with cookies?
+- Settings (inc. group edit/making)
+- Edit links
+- Password Recovery
+- EULA Support
+- Masthead? 
+- Dynamic Naviagtion Function
+- Formatting returned posts
+- CSS, Javascript & beatuifying. 
 
 ##Done
 - Database Schema
@@ -26,7 +24,12 @@
 - Index View switching
 	- Landing/Login/Registration
 - Group Management
-
+- "Add link" form
+- Index page view switching (Switch Statement)
+- Display list of user links
+- Parse links to predict the title
+- Parse links to try and get keywords
+ 
 ##Handy Functions
 spit( string ); // encases the string in paragraph tags then echoes it. Best for tracking errors.
 $output .= file_get_contents("some.html"); // adds the html to the output varable.
