@@ -139,4 +139,40 @@
 			$sql4 = "SELECT * FROM Posts WHERE GroupPosts.groupid='$name'";
 		}
 	}
+
+	function getNavBar(){
+		//build the navbar. Grey it out if not signed in.
+	}
+
+	function getPostForm(){
+		global $conn;
+		$sql = "SELECT * from GroupMembers WHERE userid='$username'";
+		$query = mysqli_query($conn, $sql);
+
+		//Initialise "post to.." with username
+		$postTo = [["U:", $_SESSION['username']]];
+
+		//Get the names of user's groups. Add them to the postable list.
+		while($row = mysqli_fetch_assoc($result)){
+			array_push($postTo, ["G:", $row['groupid']]);
+		}
+
+		//The title andlink fields.
+		$html = "<div class='post'><p><input type='text' name='title' placeholder='Post Title (Optional)'>
+				<input type='text' name='title' placeholder='Post URL'>";
+
+		//TODO - Generate an option list with the post destinations.
+		$html .= "<select>";
+		foreach($postTo as $option){
+			$html .= "<option value='$option'>$option</option>";
+		}
+		$html .= "</select>";
+
+		//TODO - "Post to.." options menu. (GET username and "SELECT groupid where userid=username")
+		
+		//Submit button
+		$html .= "<input type='submit' name='postlink' value='Post'>";
+
+		return $html;
+	}
 ?>
