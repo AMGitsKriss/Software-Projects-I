@@ -222,4 +222,14 @@
 		$title = $title->item(0)->nodeValue;
 		return $title;
 	}
+
+	function encaseResults(){
+		//TODO - Finish
+		$temp = getEntries($username, true);
+		$results = "";
+		foreach($temp as $row){
+			//TODO - Build a function to format this properly.
+			$output .= "<div class=entry-container><div class=post-main></div><div class=owner></div><div class=date-posted></div></div>";
+		}
+	}
 ?>
