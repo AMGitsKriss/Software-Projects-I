@@ -77,7 +77,7 @@
 		$sql = "INSERT INTO GroupMembers (groupid, userid) VALUES ('$group', '$username')";
 		$query = mysqli_query($conn, $sql);
 		if(!$query){ //Unsuccessful
-			echo mysqli_error($conn);
+			echo $username.mysqli_error($conn);
 			return false;
 		}
 		else { //Successful
@@ -127,10 +127,16 @@
 		if($userExists && $everything){
 			//TODO
 			//Get all of the groups a user is in, and search all posts from that user, or that group.
-			$sql1 = "SELECT * FROM GroupMembers where userid='$name'";
+			//$sql1 = "SELECT groupid FROM GroupMembers where userid='$name'";
 			//Put 'groupid' into list $memberOf
 			//Search for each post made by the user, or ascociated with a joined group
-			$sql2 = "SELECT * FROM Posts INNER JOIN GroupPosts WHERE owner='$name' OR groupid='$memberOf'";
+			$sql2 = "SELECT DISTINCT * FROM Posts WHERE owner='$name' OR postid IN (SELECT postid FROM GroupPosts WHERE groupid IN (SELECT groupid FROM GroupMembers WHERE userid='$name'))";
+			$query = mysqli_query($conn, $sql2);
+			spit(mysqli_error($conn));
+			while($row = mysqli_fetch_assoc($query)){
+				$temp = ["id" => $row['postid'], "added" => $row['added'], "name" => $row['name'], "url" => $row['url'], "owner" => $row['owner']];
+				array_push($results, $temp);
+			}
 				//Get groups that the user is a member of and search them.
 		}
 
@@ -147,8 +153,13 @@
 
 		//Otherwise, assume $name is a group
 		else{
-			//TODO - Search for posts where $name is the group.
-			$sql4 = "SELECT * FROM Posts WHERE GroupPosts.groupid='$name'";
+			//TODO - Search for posts by id in Posts table. where $name is the group.
+			$sql4 = "SELECT * FROM Posts WHERE postid IN (SELECT postid FROM GroupPosts WHERE GroupPosts.groupid='$name')";
+			$query = mysqli_query($conn, $sql4);
+			while($row = mysqli_fetch_assoc($query)){
+				$temp = ["id" => $row['postid'], "added" => $row['added'], "name" => $row['name'], "url" => $row['url'], "owner" => $row['owner']];
+				array_push($results, $temp);
+			}
 		}
 
 		return $results;

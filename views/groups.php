@@ -42,14 +42,15 @@
 		}
 	}
 	else if(isset($_POST['join-group'])){
-		$join_group = mysqli_real_escape_string($_POST['join-group']);
+		$join_group = mysqli_real_escape_string($conn, $_POST['new-group']);
+		spit($join_group);
 		//If the group ISN'T private...
-		if(checkGroupPrivate($new_group) == FALSE){
-			addtoGroup($new_group, $username);
+		if(checkGroupPrivate($join_group) == FALSE){
+			addtoGroup($join_group, $username);
 			$output .= "<p>Group joined successfully.</p>";
 		}
 		//If the group IS private
-		else if(checkGroupPrivate($new_group) == TRUE){
+		else if(checkGroupPrivate($join_group) == TRUE){
 			$output .= "<p>That group is private. You must be invited.</p>";
 		}	
 		else {
@@ -108,8 +109,13 @@
 			$output .= "<form name='leave-group' method'post' action'var_host/groups'><input type='submit' text='Leave Group'></form>";
 		}
 		//TODO - List all of the group's posts
-			spit("Results will go here.");
-			//Can't be done until Dom's part's finished.
+		//Printing entries
+		$temp = getEntries($group);
+		foreach($temp as $row){
+			//TODO - Build a function to format this properly.
+			$output .= "<p>" . $row['name'] . " : " . $row['url'] . "</p>";
+		}
+
 	}
 	else{
 		//TODO - List all of the groups the user is a member of.
@@ -119,19 +125,19 @@
 		}
 		else {
 			//Searched based on usename
-			$username = $_SESSION['username'];
-			$sql = "SELECT * FROM GroupsMembers where userid='$username'";
+			$sql = "SELECT * FROM GroupMembers INNER JOIN Groups WHERE userid='$username' AND groupid=name";
 			//Select everything from groups where userid in GroupMember is paired with that groupid.
 		}
 		$result = mysqli_query($conn, $sql);
 		if($result === FALSE){
 			//Oops
+			spit( mysqli_error($conn) );
 		}
 		else {
 			while($row = mysqli_fetch_assoc($result)){
 				//Creating the table entries for each group
 				$temp = $row['groupid'];
-				$output .= "<p><a href='var_host/groups?group=" . $temp . "'>" . $temp . " | " . $row['userid'] . "</a></p>";
+				$output .= "<p><a href='var_host/groups?group=" . $temp . "'>" . $temp . " | Owner: " . $row['owner'] . "</a></p>";
 			}
 		}
 	}
