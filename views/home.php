@@ -48,6 +48,7 @@
 	//Printing entries
 	$temp = getEntries($username, false);
 	foreach($temp as $row){
+		//TODO - Build a function to format this properly.
 		$output .= "<p>" . $row['name'] . " : " . $row['url'] . "</p>";
 	}
 
