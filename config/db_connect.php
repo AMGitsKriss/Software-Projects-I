@@ -3,9 +3,9 @@
 $host = "http://k-jessop.co.uk/soft";
 
 $conn = mysqli_connect(
-	"qvvz.uk", //server
-	"software", //username 
-	"projects", //password
+	"orion", //server
+	"root", //username 
+	"f7a7f0658a", //password
 	"software" //database name
 );
 
