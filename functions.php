@@ -125,16 +125,12 @@
 
 		//If results && $everything wanted
 		if($userExists && $everything){
-			//TODO
 			//Get all of the groups a user is in, and search all posts from that user, or that group.
-			//$sql1 = "SELECT groupid FROM GroupMembers where userid='$name'";
-			//Put 'groupid' into list $memberOf
-			//Search for each post made by the user, or ascociated with a joined group
-			$sql2 = "SELECT DISTINCT * FROM Posts WHERE owner='$name' OR postid IN (SELECT postid FROM GroupPosts WHERE groupid IN (SELECT groupid FROM GroupMembers WHERE userid='$name'))";
+			$sql2 = "SELECT DISTINCT * FROM Posts WHERE owner='$name' OR postid IN (SELECT postid FROM GroupPosts WHERE groupid IN (SELECT groupid FROM GroupMembers WHERE userid='$name')) ORDER BY postid DESC";
 			$query = mysqli_query($conn, $sql2);
 			spit(mysqli_error($conn));
 			while($row = mysqli_fetch_assoc($query)){
-				$temp = ["id" => $row['postid'], "added" => $row['added'], "name" => $row['name'], "url" => $row['url'], "owner" => $row['owner']];
+				$temp = ["postid" => $row['postid'], "added" => $row['added'], "name" => $row['name'], "url" => $row['url'], "owner" => $row['owner']];
 				array_push($results, $temp);
 			}
 				//Get groups that the user is a member of and search them.
@@ -143,21 +139,21 @@
 		//If results && !everything
 		else if($userExists && !$everything){
 			//Get user's owned posts exclusively.
-			$sql3 = "SELECT * FROM Posts WHERE owner='$name'";
+			$sql3 = "SELECT * FROM Posts WHERE owner='$name' ORDER BY postid DESC";
 			$query = mysqli_query($conn, $sql3);
 			while($row = mysqli_fetch_assoc($query)){
-				$temp = ["id" => $row['postid'], "added" => $row['added'], "name" => $row['name'], "url" => $row['url'], "owner" => $row['owner']];
+				$temp = ["postid" => $row['postid'], "added" => $row['added'], "name" => $row['name'], "url" => $row['url'], "owner" => $row['owner']];
 				array_push($results, $temp);
 			}
 		}
 
 		//Otherwise, assume $name is a group
 		else{
-			//TODO - Search for posts by id in Posts table. where $name is the group.
-			$sql4 = "SELECT * FROM Posts WHERE postid IN (SELECT postid FROM GroupPosts WHERE GroupPosts.groupid='$name')";
+			//Search for posts by id in Posts table. where $name is the group.
+			$sql4 = "SELECT * FROM Posts WHERE postid IN (SELECT postid FROM GroupPosts WHERE GroupPosts.groupid='$name') ORDER BY postid DESC";
 			$query = mysqli_query($conn, $sql4);
 			while($row = mysqli_fetch_assoc($query)){
-				$temp = ["id" => $row['postid'], "added" => $row['added'], "name" => $row['name'], "url" => $row['url'], "owner" => $row['owner']];
+				$temp = ["postid" => $row['postid'], "added" => $row['added'], "name" => $row['name'], "url" => $row['url'], "owner" => $row['owner']];
 				array_push($results, $temp);
 			}
 		}
@@ -223,13 +219,17 @@
 		return $title;
 	}
 
-	function encaseResults(){
-		//TODO - Finish
-		$temp = getEntries($username, true);
-		$results = "";
-		foreach($temp as $row){
-			//TODO - Build a function to format this properly.
-			$output .= "<div class=entry-container><div class=post-main></div><div class=owner></div><div class=date-posted></div></div>";
+	function encaseResults($plainResults){
+		//post container tag
+		$results = "<div class=post-container>";
+		foreach($plainResults as $row){
+			//plainResults: $row['postid'] | $row['added'] | $row['name'] | $row['url'] | $row['owner']
+			//Formatting the information in plainResults.
+			$col = $_SESSION['colour'];
+			$results .= "<div class=entry-container style='background-color:$col'><div class=post-main><a href='".$row['url']."'>".$row['name']."</a><div class=postid>".$row['postid']."</div></div><div class=owner>".$row['owner']."</div><div class=date-posted>".$row['added']."</div></div>\n";
+			//TODO - Add editing form
 		}
+		$results .= "</div>";
+		return $results;
 	}
 ?>

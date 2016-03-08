@@ -50,6 +50,7 @@
 					$hashed_pass = $row['password'];
 					$check_user = mysqli_num_rows($result);
 					$permission = $row['permissions'];
+					$userColour = $row['colour'];
 				}
 			}
 
@@ -60,6 +61,7 @@
 		 		$_SESSION['login'] = "true";
 		 		$_SESSION['username'] = $saved_username;
 		 		$_SESSION['admin'] = ($permission == 0) ? FALSE : TRUE;
+		 		$_SESSION['colour'] = $userColour;
 				header('Location: '.$host);
 			}
 			else{

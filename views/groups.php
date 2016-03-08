@@ -121,7 +121,7 @@
 		//TODO - List all of the groups the user is a member of.
 		if($_SESSION['admin']){
 			//Get ALL groups
-			$sql = "SELECT DISTINCT * FROM GroupMembers";
+			$sql = "SELECT DISTINCT * FROM GroupMembers INNER JOIN Groups";
 		}
 		else {
 			//Searched based on usename

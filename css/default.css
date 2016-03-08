@@ -29,15 +29,41 @@ body{
 	margin-left: auto;
 	margin-right: auto;
 }
-.entry-contianer{
-
+.entry-container{
+	display: block;
+	text-align: left;
+	padding: 0px;
+	width: 100%;
 }
 .date-posted{
-
+	width: 15%;
+	text-align: center;
 }
 .owner{
-
+	width: 15%;
+	line-height: 100%;
 }
 .post-main{
-	
+	width: 70%;
+}
+.post-edit-submit{
+
+}
+.postid{
+	visibility: hidden;
+}
+.post-container div{
+	display: inline-block;
+	overflow: hidden;
+	text-align: left;
+	vertical-align: middle;
+	border-style: dotted;
+	border-width: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin: 0px;
+	margin-top: 2px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box; 
 }

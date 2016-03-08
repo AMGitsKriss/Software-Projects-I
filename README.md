@@ -14,6 +14,7 @@
 - Dynamic Naviagtion Function
 - Formatting returned posts
 - CSS, Javascript & beatuifying. 
+- User colours for entries?
 
 ##Done
 - Database Schema
