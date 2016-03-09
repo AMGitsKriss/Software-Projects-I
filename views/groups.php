@@ -109,12 +109,8 @@
 			$output .= "<form name='leave-group' method'post' action'var_host/groups'><input type='submit' text='Leave Group'></form>";
 		}
 		//TODO - List all of the group's posts
-		//Printing entries
-		$temp = getEntries($group);
-		foreach($temp as $row){
-			//TODO - Build a function to format this properly.
-			$output .= "<p>" . $row['name'] . " : " . $row['url'] . "</p>";
-		}
+		//Getting, prettifying and printing entries
+		$output .= encaseResults(getEntries($group, true));
 
 	}
 	else{
