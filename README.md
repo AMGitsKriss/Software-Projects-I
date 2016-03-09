@@ -2,6 +2,9 @@
 
 - Login with cookies?
 - Settings (inc. group edit/making)
+	- User colours for entries?
+	- Change email address
+	- Accessability?
 - Edit links
 	- Update Form
 	- Javascript to show/hide update form
@@ -14,7 +17,6 @@
 - Dynamic Naviagtion Function
 - Formatting returned posts
 - CSS, Javascript & beatuifying. 
-- User colours for entries?
 
 ##Done
 - Database Schema
