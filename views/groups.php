@@ -103,13 +103,21 @@
 			}
 			$output .= "<form name='leave-group' method'post' action'var_host/groups'><label>Set new group admin:</label><input type='text' name='new-owner'><input type='submit' text='Leave Group'></form>";
 		}
-		else {
+		//If a gorup member, show dialogue
+		else if(getGroupMember($username, $group)){
 			//Everyone else then sees...
 			$output .= "<form name='leave-group' method'post' action'var_host/groups'><input type='submit' text='Leave Group'></form>";
 		}
-		//TODO - What if the viewer isn't a group member?
-		//Getting, prettifying and printing entries
-		$output .= encaseResults(getEntries($group, true));
+
+		//Group is private?
+		if(checkGroupPrivate($group)){
+			header("Location: $host/403");
+			//No permission to view this
+		}
+		else {
+			//Getting, prettifying and printing entries
+			$output .= encaseResults(getEntries($group, true));
+		}
 
 	}
 	else{

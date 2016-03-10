@@ -107,6 +107,17 @@
 		return $row['owner'];
 	}
 
+	function getGroupMember($username, $group){
+		global $conn;
+		$sql = "SELECT userid FROM GroupMembers WHERE groupid='$group' AND userid='$username'";
+		$result = mysqli_query($conn, $sql);
+		//If there is one row, return true
+		if(mysqli_num_rows($result) == 1){
+			return true;
+		}
+		return false;
+	}
+
 	function getEntries($name, $everything = false){
 		global $conn;
 		$results = [];

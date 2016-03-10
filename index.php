@@ -61,6 +61,10 @@
 		$output .= generateHeader("Your Account", $_SESSION["login"]);
 		include 'views/account.php';
 		break;
+	case '403' :
+		$output .= generateHeader("Forbidden", $_SESSION["login"]);
+		include 'views/403.php';
+		break;
 	default :
 		$output .= generateHeader("Page Not Found", $_SESSION["login"]);
 		include 'views/404.php';
