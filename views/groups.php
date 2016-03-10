@@ -96,7 +96,6 @@
 			else if(isset($_GET['remove'])){
 				$user_to_remove = mysqli_real_escape_string($_GET['remove']); 
 				removeFromGroup($group, $user_to_remove);
-				//TODO - what if the owner removes themselves?
 			}
 			//If group is private, add the "add/remove" user dialogue here.
 			if(checkGroupPrivate($group)){
@@ -108,7 +107,7 @@
 			//Everyone else then sees...
 			$output .= "<form name='leave-group' method'post' action'var_host/groups'><input type='submit' text='Leave Group'></form>";
 		}
-		//TODO - List all of the group's posts
+		//TODO - What if the viewer isn't a group member?
 		//Getting, prettifying and printing entries
 		$output .= encaseResults(getEntries($group, true));
 

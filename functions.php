@@ -231,4 +231,64 @@
 		$results .= "</div>\n";
 		return $results;
 	}
+
+	function generateColourForm($admin = false){ //Takes isset-session-admin. If not given, is false.
+		//List of allowed colours
+		$colChoice = ["aquamarine", "brown", "crimson", "cadetblue", "lightgrey", "darkred", "white", "gold", "greenyellow", "pink", "khaki", "lawngreen", "lightblue", "orange", "tomato", "wheat"];
+		
+		$select = "<div class=colourselect>\n";
+		
+		//Populating a form of colours
+		foreach($colChoice as $col){
+			$select .= "<label>$col</label><input type='radio' name='colour' value='$col'>\n";
+		}
+		if($admin){
+			//Add a text box for custom colour codes.
+			$select .= "<label>Custom Colour: (This overrides the above radio-buttons)</label><input type='text' name='custom' placeholder='#FFFFFF'>\n";
+		}
+		$select .= "</div>\n";
+		return $select;
+	}
+
+	function generateAccountPage($username, $admin = false){
+		global $conn;
+
+		//Get teh user's information to present
+		$sql = "SELECT * FROM Users WHERE name='$username'";
+		$results = mysqli_query($conn, $sql);
+		$userDetails = mysqli_fetch_assoc($conn);
+
+		//Present the account
+		$select = "<form method=post, action=''>\n<label>Username:</label><p>$userDetails[name]</p>\n";
+		$select .= generatecolourForm($admin); 
+
+		//prepopulated email address field.
+		$select .="<label>Email Address:</label><p><input type='text' name='email' value='$userDetails[email]'></p>";
+
+		//Update Password
+		$select .="<label>Update Password:</label>\n<p><input type='password' name='password'></p>\n<p><input type='password' name='confirmpassword'></p>";
+
+		//Colour select
+		$select =. generateColourForm($admin);
+
+		$select .= "</form>\n";
+	}
+
+	function generateHeader($pageTitle, $loggedIn){
+		//Header HTML, along with the navigation HTML
+		$header = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n<html xmlns='http://www.w3.org/1999/xhtml'>\n<head>\n<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />\n<title>Operam - $pageTitle</title>\n<link rel='stylesheet' type='text/css' href='css/default.css'>\n</head>\n<body>";
+		
+		//TODO - Call the navigation function here
+		if ($loggedIn){
+			$header .= file_get_contents('templates/navigation.html');
+		}
+		else {
+			$header .= file_get_contents('templates/navigation-signed-out.html');
+		}
+		//TODO - Will this work without handing the fucntion the session?
+		if(isset($_SESSION['admin'])){
+			$header .= file_get_contents('templates/adminNavigation.html');
+		}
+		return $header;
+	}
 ?>
