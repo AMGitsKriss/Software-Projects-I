@@ -243,15 +243,22 @@
 		return $results;
 	}
 
-	function generateColourForm($admin = false){ //Takes isset-session-admin. If not given, is false.
+	function generateColourForm($userCol, $admin = false){ //Takes isset-session-admin. If not given, is false.
 		//List of allowed colours
 		$colChoice = ["aquamarine", "brown", "crimson", "cadetblue", "lightgrey", "darkred", "white", "gold", "greenyellow", "pink", "khaki", "lawngreen", "lightblue", "orange", "tomato", "wheat"];
 		
 		$select = "<div class=colourselect>\n";
 		
+		//checked='checked'
+
 		//Populating a form of colours
 		foreach($colChoice as $col){
-			$select .= "<p><input type='radio' name='colour' value='$col'><label>$col</label></p>\n";
+			if($col == $userCol){
+				$select .= "<p><input type='radio' name='colour' checked='checked' value='$col'><label>$col</label></p>\n";
+			}
+			else{
+				$select .= "<p><input type='radio' name='colour' value='$col'><label>$col</label></p>\n";
+			}
 		}
 		if($admin){
 			//Add a text box for custom colour codes.
@@ -279,7 +286,7 @@
 		$select .="<label>Update Password:</label>\n<p><input type='password' name='password1'></p>\n<p><input type='password' name='password2'></p>";
 
 		//Colour select
-		$select .= generateColourForm($admin);
+		$select .= generateColourForm($userDetails['colour'], $admin);
 
 		$select .= "<input type='submit' value='Update Account' name='update-accpunt'></form>\n";
 
