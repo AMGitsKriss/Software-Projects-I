@@ -251,7 +251,7 @@
 		
 		//Populating a form of colours
 		foreach($colChoice as $col){
-			$select .= "<label>$col</label><input type='radio' name='colour' value='$col'>\n";
+			$select .= "<p><input type='radio' name='colour' value='$col'><label>$col</label></p>\n";
 		}
 		if($admin){
 			//Add a text box for custom colour codes.
@@ -267,22 +267,23 @@
 		//Get teh user's information to present
 		$sql = "SELECT * FROM Users WHERE name='$username'";
 		$results = mysqli_query($conn, $sql);
-		$userDetails = mysqli_fetch_assoc($conn);
+		$userDetails = mysqli_fetch_assoc($results);
 
 		//Present the account
 		$select = "<form method=post, action=''>\n<label>Username:</label><p>$userDetails[name]</p>\n";
-		$select .= generatecolourForm($admin); 
 
 		//prepopulated email address field.
 		$select .="<label>Email Address:</label><p><input type='text' name='email' value='$userDetails[email]'></p>";
 
 		//Update Password
-		$select .="<label>Update Password:</label>\n<p><input type='password' name='password'></p>\n<p><input type='password' name='confirmpassword'></p>";
+		$select .="<label>Update Password:</label>\n<p><input type='password' name='password1'></p>\n<p><input type='password' name='password2'></p>";
 
 		//Colour select
-		$select =. generateColourForm($admin);
+		$select .= generateColourForm($admin);
 
-		$select .= "</form>\n";
+		$select .= "<input type='submit' value='Update Account' name='update-accpunt'></form>\n";
+
+		return $select;
 	}
 
 	function generateHeader($pageTitle, $loggedIn){
