@@ -306,7 +306,7 @@
 		}
 		//TODO - Will this work without handing the fucntion the session?
 		if(isset($_SESSION['admin'])){
-			$header .= file_get_contents('templates/adminNavigation.html');
+			//$header .= file_get_contents('templates/adminNavigation.html');
 		}
 		return $header;
 	}
