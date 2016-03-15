@@ -19,7 +19,7 @@
 		update password and email
 	*/
 
-	//Backend actions. POST data.
+	//Backend actions. POST data.a
 	if(isset($_POST['update-account'])){
 		//Update teh email field
 		$email = $_POST['email'];
@@ -32,18 +32,37 @@
 			$colour = $_POST['colour'];
 		}
 
-		//If passwords have been entered
-		if(isset($_POST['password1'] || $_POST['password2'])){
+		//If neither password field is empty
+		if($_POST['password1'] != "" && $_POST['password2'] != ""){
+			//And they're identical
 			if($_POST['password1'] === $_POST['password2']){
-				// TODO - HASH ME
-				$password = $_POST['password1'];
+				//HASH ME
+				require("libs/PasswordHash.php");
 
-				$sql = "UPDATE Users SET password='$password', colour='$colour', email='$email'";
+				$password = $_POST['password1'];
+				$hasher = new PasswordHash(8, false);
+				//Minimum password length is 6
+				if(strlen($_POST['password1'])>=6){
+					$password = $conn->real_escape_string($password);
+					//Max length is 72
+					if(strlen($password) > 72){
+							die("Password must be 72 characters or less.");
+						}
+					$password = $hasher->HashPassword($password);
+				}
+				//If password is too short
+				else {
+					die("Password must be 6 characters or more.");
+				}
+
+				$sql = "UPDATE Users SET password='$password', colour='$colour', email='$email' WHERE name='$username'";
 			}
 		}
-		//If passwords haven't been entered.
+		//If passwords haven't been entered..
 		else {
-			$sql = "UPDATE Users SET colour='$colour', email='$email'";
+			$sql = "UPDATE Users SET colour='$colour', email='$email' WHERE name='$username'";
 		}
+		$query = mysqli_query($conn, $sql);
+
 	}
 ?>

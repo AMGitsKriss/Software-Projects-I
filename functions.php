@@ -254,10 +254,10 @@
 		//Populating a form of colours
 		foreach($colChoice as $col){
 			if($col == $userCol){
-				$select .= "<p><input type='radio' name='colour' checked='checked' value='$col'><label>$col</label></p>\n";
+				$select .= "<p><label><input type='radio' name='colour' checked='checked' value='$col'>$col</label></p>\n";
 			}
 			else{
-				$select .= "<p><input type='radio' name='colour' value='$col'><label>$col</label></p>\n";
+				$select .= "<p><label><input type='radio' name='colour' value='$col'>$col</label></p>\n";
 			}
 		}
 		if($admin){
@@ -277,7 +277,7 @@
 		$userDetails = mysqli_fetch_assoc($results);
 
 		//Present the account
-		$select = "<form method=post, action=''>\n<label>Username:</label><p>$userDetails[name]</p>\n";
+		$select = "<form method='post' action='var_host/account'>\n<label>Username:</label><p>$userDetails[name]</p>\n";
 
 		//prepopulated email address field.
 		$select .="<label>Email Address:</label><p><input type='text' name='email' value='$userDetails[email]'></p>";
@@ -288,7 +288,7 @@
 		//Colour select
 		$select .= generateColourForm($userDetails['colour'], $admin);
 
-		$select .= "<input type='submit' value='Update Account' name='update-accpunt'></form>\n";
+		$select .= "<input type='submit' value='Update Account' name='update-account'>\n</form>\n";
 
 		return $select;
 	}

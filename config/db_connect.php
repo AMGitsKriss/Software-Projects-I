@@ -1,6 +1,9 @@
 <?php
 
-$host = "http://orion/soft";
+$host = "http://qvvz.uk/soft";
+if(strpos($_SERVER['REMOTE_ADDR'], "fe80::94f6:3b70:fef7:84ca") !== False){
+	$host = "http://orion/soft";
+}
 
 $conn = mysqli_connect(
 	"localhost", //server
