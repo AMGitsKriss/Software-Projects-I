@@ -43,6 +43,7 @@
 			$query = mysqli_query($conn, $sql);
 			echo mysqli_error($conn);
 		}
+		$query = mysqli_query($conn, $sql);
 	}
 
 	//Printing entries

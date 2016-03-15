@@ -5,9 +5,6 @@
 	require("functions.php");
 	require("config/db_connect.php");
 
-	include("templates/header.html");
-
-	spit("This is a Spit()");
 	session_start();
 
 	//Declare this now
@@ -24,21 +21,11 @@
 	    $page_id = $_GET['page'];
 	}
 
-	//TODO Kam? - Refactor this to use a "buildNavigation(bool loggedIn)" function. 
+	//These $tempOutput enties need to come AFTER the switch statement. 
 	//Should return a interactive version of navigation when handed false. 
 	//Possible 2D array for navigation structure - Means changes only have to be made in one place.
-	if (isset($_SESSION['login']) && $_SESSION["login"]=='true')
-	{
-		$output .= file_get_contents('templates/navigation.html');
-	}
-	else {
-		$output .= file_get_contents('templates/navigation-signed-out.html');
-	}
 
-	if(isset($_SESSION['admin']))
-	{
-	$output .= file_get_contents('templates/adminNavigation.html');
-	}
+
 	//If not logged in
 	if(!isset($_SESSION['login'])){
 		//Send them straight to the login/register screen
@@ -53,23 +40,39 @@
 	spit("Going to: ".$page_id);
 	switch ($page_id) {
 	case 'home' :
-	    include 'views/home.php';
-	    break;
+		$output .= generateHeader("Landing Page", $_SESSION["login"]);
+		include 'views/home.php';
+		break;
 	case 'login':
 		//Contains both the login and registration content
+		$output .= generateHeader("Sign in", $_SESSION["login"]);
 		include 'views/login.php';
 		break;
 	case 'logout' :
 		//include 'views/logout.php';
 		session_destroy();
 		header('location: ' . $host);
-	    break;
-	  case 'groups' :
-	  	include 'views/groups.php';
-	  	break;
+		break;
+	case 'groups' :
+		$output .= generateHeader("Your Groups", $_SESSION["login"]);
+		include 'views/groups.php';
+		break;
+	case 'account' :
+		$output .= generateHeader("Your Account", $_SESSION["login"]);
+		include 'views/account.php';
+		break;
+	case 'friends' :
+		$output .= generateHeader("Friends", $_SESSION["login"]);
+		include 'views/friends.php';
+		break;
+	case '403' :
+		$output .= generateHeader("Forbidden", $_SESSION["login"]);
+		include 'views/403.php';
+		break;
 	default :
-	    include 'views/404.php';
-	    break;
+		$output .= generateHeader("Page Not Found", $_SESSION["login"]);
+		include 'views/404.php';
+		break;
 	}
 
 
