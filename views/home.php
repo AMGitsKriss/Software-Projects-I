@@ -25,12 +25,12 @@
 			//Get the title, escape it, then crop it to 100 characters.
 			$title = substr(mysqli_real_escape_string($conn, getPageTitle($url)), 0, 100);
 		}
-		//TODO - Stuff needs inserting into posts here
+		//Stuff needs inserts here
 
 		$url = mysqli_real_escape_string($conn, $url);
 		$ip = $_SERVER['REMOTE_ADDR'];
 
-		$sql = "INSERT INTO Posts (name, url, owner, ip) VALUES ('$title', '$url', '$username', '$ip')";
+		$sql = "INSERT INTO Posts (postname, url, owner, ip) VALUES ('$title', '$url', '$username', '$ip')";
 
 		$query = mysqli_query($conn, $sql);
 		echo mysqli_error($conn);
@@ -43,7 +43,6 @@
 			$query = mysqli_query($conn, $sql);
 			echo mysqli_error($conn);
 		}
-		$query = mysqli_query($conn, $sql);
 	}
 
 	//Printing entries

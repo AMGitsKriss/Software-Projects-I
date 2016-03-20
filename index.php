@@ -33,6 +33,7 @@
 	}
 
 	//We'll be using this a lot
+	$username = "";
 	$username = $_SESSION['username'];
 
 //-----------------------------------------------
@@ -45,7 +46,7 @@
 		break;
 	case 'login':
 		//Contains both the login and registration content
-		$output .= generateHeader("Sign in", $_SESSION["login"]);
+		$output .= generateHeader("Sign in", false);
 		include 'views/login.php';
 		break;
 	case 'logout' :
