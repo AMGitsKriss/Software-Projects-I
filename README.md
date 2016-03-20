@@ -38,9 +38,10 @@
 - Parse links to predict the title (Kriss)
 
  
-##Handy Functions
-spit( string ); // encases the string in paragraph tags then echoes it. Best for tracking errors.
-$output .= file_get_contents("some.html"); // adds the html to the output varable.
+##Installation
+Ensure server, username, password and database in db_config.php point to a valid database. The host variable also needs to be it's external address. Thus, if the site went in the root of mydomain.com then host would be "mydomain.com" but if it was in a subfolder named site, then host would be "bydomain.com/site"
+
+Browse to config/installation.php
 
 ##Issues
 - "config/install.php" fails to run. For now, use "config/temp.sql" to build database instead.
