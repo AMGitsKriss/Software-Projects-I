@@ -110,7 +110,7 @@
 		}
 
 		//Group is private?
-		if(checkGroupPrivate($group)){
+		if(checkGroupPrivate($group) && $_SESSION['admin'] == false){
 			header("Location: $host/403");
 			//No permission to view this
 		}
@@ -123,12 +123,14 @@
 	else{
 		//TODO - List all of the groups the user is a member of.
 		if($_SESSION['admin']){
+			spit("Admin List");
 			//Get ALL groups
-			$sql = "SELECT DISTINCT * FROM GroupMembers INNER JOIN Groups";
+			$sql = "SELECT DISTINCT owner, groupid FROM Groups INNER JOIN GroupMembers";
 		}
 		else {
+			spit("Normal List");
 			//Searched based on usename
-			$sql = "SELECT * FROM GroupMembers INNER JOIN Groups WHERE userid='$username' AND groupid=name";
+			$sql = "SELECT DISTINCT * FROM GroupMembers INNER JOIN Groups WHERE userid='$username' AND groupid=name";
 			//Select everything from groups where userid in GroupMember is paired with that groupid.
 		}
 		$result = mysqli_query($conn, $sql);

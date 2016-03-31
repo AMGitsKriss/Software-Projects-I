@@ -245,7 +245,8 @@
 
 	function generateColourForm($userCol, $admin = false){ //Takes isset-session-admin. If not given, is false.
 		//List of allowed colours
-		$colChoice = ["aquamarine", "brown", "crimson", "cadetblue", "lightgrey", "darkred", "white", "gold", "greenyellow", "pink", "khaki", "lawngreen", "lightblue", "orange", "tomato", "wheat"];
+		$colChoice = ["LightSteelBlue", "PaleGoldenRod", "CadetBlue", "LightGrey", "Salmon", "SandyBrown", "Gold", 
+						"GreenYellow", "Pink", "Khaki", "PaleVioletRed", "LightBlue", "Orange", "Tomato", "Wheat", "YellowGreen"];
 		
 		$select = "<div class=colourselect>\n";
 		
@@ -254,10 +255,10 @@
 		//Populating a form of colours
 		foreach($colChoice as $col){
 			if($col == $userCol){
-				$select .= "<p><label><input type='radio' name='colour' checked='checked' value='$col'>$col</label></p>\n";
+				$select .= "<p style='background-color:$col'><label><input type='radio' name='colour' checked='checked' value='$col'>$col</label></p>\n";
 			}
 			else{
-				$select .= "<p><label><input type='radio' name='colour' value='$col'>$col</label></p>\n";
+				$select .= "<p style='background-color:$col'><label><input type='radio' name='colour' value='$col'>$col</label></p>\n";
 			}
 		}
 		if($admin){
