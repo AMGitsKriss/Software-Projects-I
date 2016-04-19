@@ -197,11 +197,11 @@
 		$html = "<div class='post'>\n<form action='' method='post'>\n<p><input type='text' name='title' placeholder='Post Title (Optional)'>\n<input type='text' name='url' placeholder='Post URL'>\n";
 
 		//Generate an option list with the post destinations.
-		$html .= "<select name='postTo'>\n";
+		$html .= "<span class='option-container'><select name='postTo'>\n";
 		foreach($postTo as $option){
 			$html .= "<option value='$option[1]'>$option[0]$option[1] </option>\n";
 		}
-		$html .= "</select>\n";
+		$html .= "</select></span>\n";
 
 		//Submit button
 		$html .= "<input type='submit' name='postlink' value='Post'>\n</p>\n</form>\n</div>\n";
@@ -236,7 +236,8 @@
 		foreach($plainResults as $row){
 			//plainResults: $row['postid'] | $row['added'] | $row['name'] | $row['url'] | $row['owner']
 			//Formatting the information in plainResults.
-			$results .= "<div class=entry-container id=post".$row['postid']." style='background-color:".$row['colour']."'><div class=post-main><a href='".$row['url']."'>".$row['postname']."</a></div><div class=owner>".$row['owner']."</div><div class=date-posted>".$row['added']."</div></div>\n";
+			//TODO make sure entryEditForm("postID") is properly excaped. 
+			$results .= "<div class=entry-container id=post".$row['postid']." style='background-color:".$row['colour']."'><div class=post-main><a href='".$row['url']."'>".$row['postname']."</a></div><div class=owner>".$row['owner']."</div><div class=date-posted>".$row['added']."</div><div class=edit><a onClick='editEntryForm(\'post".$row['postid']."\')' href='javascript:void(0);'>[Edit]</a></div></div>\n";
 			//TODO - Add editing form
 		}
 		$results .= "</div>\n";
@@ -296,7 +297,7 @@
 
 	function generateHeader($pageTitle, $loggedIn){
 		//Header HTML, along with the navigation HTML
-		$header = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n<html xmlns='http://www.w3.org/1999/xhtml'>\n<head>\n<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />\n<title>Operam - $pageTitle</title>\n<link rel='stylesheet' type='text/css' href='css/default.css'>\n</head>\n<body>";
+		$header = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n<html xmlns='http://www.w3.org/1999/xhtml'>\n<head>\n<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />\n<title>Operam - $pageTitle</title>\n<link rel='stylesheet' type='text/css' href='css/default.css'>\n  <script src='https://code.jquery.com/jquery-1.10.2.js'></script>\n<script src='javascript.js'></script>\n</head>\n<body>";
 		
 		//TODO - Call the navigation function here
 		if ($loggedIn){
