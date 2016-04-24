@@ -230,14 +230,20 @@
 		return $title;
 	}
 
-	function encaseResults($plainResults){
+	function encaseResults($plainResults, $editable = false){
 		//post container tag
 		$results = "<div class=post-container>\n";
+
+		//Do we want an edit button on these posts?
+		$editLink = "";
+		if($editable == true){
+			$editLink = "<div class=edit><a onClick='editEntryForm(\"post".$row['postid']."\")' href='javascript:void(0);'>[Edit]</a></div>";
+		}
 		foreach($plainResults as $row){
 			//plainResults: $row['postid'] | $row['added'] | $row['name'] | $row['url'] | $row['owner']
 			//Formatting the information in plainResults.
 			//TODO make sure entryEditForm("postID") is properly excaped. 
-			$results .= "<div class=entry-container id=post".$row['postid']." style='background-color:".$row['colour']."'><div class=post-main><a href='".$row['url']."'>".$row['postname']."</a></div><div class=owner>".$row['owner']."</div><div class=date-posted>".$row['added']."</div><div class=edit><a onClick='editEntryForm(\'post".$row['postid']."\')' href='javascript:void(0);'>[Edit]</a></div></div>\n";
+			$results .= "<div class=entry-container id=post".$row['postid']." style='background-color:".$row['colour']."'><div class=post-main><a href='".$row['url']."'>".$row['postname']."</a></div><div class=owner>".$row['owner']."</div><div class=date-posted>".$row['added']."</div>$editLink</div>\n";
 			//TODO - Add editing form
 		}
 		$results .= "</div>\n";
@@ -297,7 +303,8 @@
 
 	function generateHeader($pageTitle, $loggedIn){
 		//Header HTML, along with the navigation HTML
-		$header = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n<html xmlns='http://www.w3.org/1999/xhtml'>\n<head>\n<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />\n<title>Operam - $pageTitle</title>\n<link rel='stylesheet' type='text/css' href='css/default.css'>\n  <script src='https://code.jquery.com/jquery-1.10.2.js'></script>\n<script src='javascript.js'></script>\n</head>\n<body>";
+		//JQuery included (1.12.3)
+		$header = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n<html xmlns='http://www.w3.org/1999/xhtml'>\n<head>\n<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />\n<title>Operam - $pageTitle</title>\n<link rel='stylesheet' type='text/css' href='css/default.css'>\n  <script src='https://code.jquery.com/jquery-1.12.3.js'></script>\n<script src='javascript.js'></script>\n</head>\n<body>";
 		
 		//TODO - Call the navigation function here
 		if ($loggedIn){

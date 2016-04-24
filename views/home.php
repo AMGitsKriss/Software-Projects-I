@@ -45,7 +45,54 @@
 		}
 	}
 
-	//Printing entries
-	$output .= encaseResults(getEntries($username, true));
+	//User edited link
+	if(isset($_POST['update'])){
+
+		$id = $_POST['id'];
+		$title =  mysqli_real_escape_string($conn, $_POST['title']);
+		$url =  mysqli_real_escape_string($conn, $_POST['url']);
+		$group = $_POST['postTo'];
+		//Update post with corresponding id. 
+		$sql = "UPDATE posts SET postname='$title', url='$url' WHERE postid='$id'";
+		$query = mysqli_query($conn, $sql);
+		echo mysqli_error($conn);
+
+		//To update the group, we want to delete anything with this id from the relationship table
+		//then IF it's not being posted to the user, insert a new relationship into the table.
+
+		//Thus, delete relationships first
+		$sql = "DELETE FROM groupposts WHERE postid='$id'";
+		$query = mysqli_query($conn, $sql);
+		echo mysqli_error($conn);
+		if($group != $username){
+			//Then add to the relationship table 
+			$sql = "INSERT INTO groupposts (postid, groupid) VALUES ('$id', '$group')";
+			$query = mysqli_query($conn, $sql);
+			echo mysqli_error($conn);
+		}		
+	}
+
+	//User deleted link
+	if(isset($_POST['delete'])){
+		
+		$id = $_POST['id'];
+		$title =  mysqli_real_escape_string($conn, $_POST['title']);
+		$url =  mysqli_real_escape_string($conn, $_POST['url']);
+		$group = $_POST['postTo'];
+
+		//delete post with corresponding id
+		$sql = "DELETE FROM posts WHERE postid='$id'";
+		$query = mysqli_query($conn, $sql);
+		echo mysqli_error($conn);
+
+
+		//Then skim through the group/post relationship table to delete any references to that id
+		$sql = "DELETE FROM groupposts WHERE postid='$id'";
+		$query = mysqli_query($conn, $sql);
+		echo mysqli_error($conn);
+	}
+
+	//Printing entries, WITH edit buttons on landing page.
+	$output .= encaseResults(getEntries($username, true), true);
 
 ?>

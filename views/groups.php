@@ -115,7 +115,7 @@
 			//No permission to view this
 		}
 		else {
-			//Getting, prettifying and printing entries
+			//Getting, prettifying and printing entries WITHOUT edit functionality. User currently must do that via landing page.
 			$output .= encaseResults(getEntries($group, true));
 		}
 
