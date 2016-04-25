@@ -20,10 +20,6 @@
 footer{
 	border-top: solid;
 }
-header{
-	border-top: dashed;
-	border-color: grey;
-}
 body{
 	max-width: 1000px;
 	margin-left: auto;
