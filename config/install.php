@@ -22,10 +22,6 @@
 
 "CREATE TABLE GroupMembers (groupid VARCHAR(100), userid VARCHAR(100), FOREIGN KEY (groupid) REFERENCES Groups(name), FOREIGN KEY (userid) REFERENCES Users(name))",
 
-"CREATE TABLE Tags (name VARCHAR(100) NOT NULL PRIMARY KEY)",
-
-"CREATE TABLE TagMambers (tagid VARCHAR(100), postid INT(6), FOREIGN KEY (tagid) REFERENCES Tags(name), FOREIGN KEY (postid) REFERENCES Posts(postid))",
-
 "CREATE TABLE GroupPosts (postid INT, groupid VARCHAR(100), FOREIGN KEY (groupid) REFERENCES Groups(name), FOREIGN KEY (postid) REFERENCES Posts(postid))");
 	//Applying the sql
 	for($i = 0; $i < count($sql); $i++){
