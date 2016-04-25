@@ -1,6 +1,6 @@
 <?php 
-	error_reporting(E_ALL);
-	ini_set('display_errors', true);
+	//error_reporting(E_ALL);
+	//ini_set('display_errors', true);
 	
 	require("functions.php");
 	require("config/db_connect.php");
@@ -38,7 +38,8 @@
 
 //-----------------------------------------------
 
-	spit("Going to: ".$page_id);
+	//Debuging ouuput
+	//spit("Going to: ".$page_id);
 	switch ($page_id) {
 	case 'home' :
 		$output .= generateHeader("Landing Page", $_SESSION["login"]);
