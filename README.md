@@ -1,21 +1,9 @@
 ##Roadmap
 
-- Login with cookies?
-- Settings (inc. group edit/making)
-	- User colours for entries?
-	- Change email address
-	- Accessability?
-- Edit links
-	- Update Form
-	- Javascript to show/hide update form
-	- update function
-	- delete post
-	- remove  from group
 - Password Recovery
 - EULA Support
 - Masthead? 
 - Dynamic Naviagtion Function
-- Formatting returned posts
 - CSS, Javascript & beatuifying. 
 - Parse links to try and get keywords
 
@@ -36,6 +24,16 @@
 - "Add link" form (Kriss)
 - Display list of user links (Kriss)
 - Parse links to predict the title (Kriss)
+- Settings (inc. group edit/making)
+	- User colours for entries?
+	- Change email address
+- Formatting returned posts
+- Edit links
+	- Update Form
+	- Javascript to show/hide update form
+	- update function
+	- delete post
+	- remove  from group
 
  
 ##Installation
