@@ -22,7 +22,10 @@
 
 "CREATE TABLE GroupMembers (groupid VARCHAR(100), userid VARCHAR(100), FOREIGN KEY (groupid) REFERENCES Groups(name), FOREIGN KEY (userid) REFERENCES Users(name))",
 
-"CREATE TABLE GroupPosts (postid INT, groupid VARCHAR(100), FOREIGN KEY (groupid) REFERENCES Groups(name), FOREIGN KEY (postid) REFERENCES Posts(postid))");
+"CREATE TABLE GroupPosts (postid INT, groupid VARCHAR(100), FOREIGN KEY (groupid) REFERENCES Groups(name), FOREIGN KEY (postid) REFERENCES Posts(postid))",
+
+"CREATE TABLE chat (id INT, name VARCHAR(100), msg VARCHAR(255), date TIMESTAMP CURRENT_TIMESTAMP)");
+
 	//Applying the sql
 	for($i = 0; $i < count($sql); $i++){
 		if ($conn->query($sql[$i]) === TRUE) {
