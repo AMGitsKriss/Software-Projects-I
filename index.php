@@ -34,7 +34,7 @@
 
 	//We'll be using this a lot
 	$username = "";
-	$username = $_SESSION['username'];
+	if(isset($_SESSION['username'])) $username = $_SESSION['username'];
 
 //-----------------------------------------------
 
