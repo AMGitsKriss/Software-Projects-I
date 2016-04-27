@@ -23,7 +23,8 @@ $output .= "<script>function ajax(){var req = new XMLHttpRequest();
 		<textarea name=\"msg\"></textarea>
 		<input type=\"submit\" name=\"submit\" value=\"Send it\"/>
 		
-		</form>";
+		</form>
+		";
 
 		if(isset($_POST['submit'])){ 
 		
@@ -37,7 +38,7 @@ $output .= "<script>function ajax(){var req = new XMLHttpRequest();
 		$msg = htmlspecialchars($msg);
 		$msg = mysqli_real_escape_string($conn,$msg);
 		
-		$query = "INSERT INTO chat (name,msg) values ('$name','$msg')";
+		$query = "INSERT INTO chat (name,msg,group) values ('$name','$msg')";
 		
 		$run = $conn->query($query);
 		

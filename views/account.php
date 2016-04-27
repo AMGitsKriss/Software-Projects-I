@@ -25,7 +25,7 @@
 		$email = $_POST['email'];
 
 		//If the user is an admin, check the special field for a colour value. Otherwise, grab it from the radio-buttons.
-		if($_SESSION['admin'] && isset($_POST['custom'])){
+		if($_SESSION['admin'] && $_POST['custom'] != ""){
 			$colour = $_POST['custom'];
 		} 
 		else {
