@@ -1,5 +1,5 @@
 <?php 
-include_once('../config/dbconnect.php');
+include_once('../config/db_connect.php');
 
 function formatDate($date){
 	return date('g:i a', strtotime($date));
@@ -7,7 +7,7 @@ function formatDate($date){
 
 		
 	$query = "SELECT * FROM chat ORDER BY id DESC";
-	$run = $con->query($query);
+	$run = $conn->query($query);
 	while($row = $run->fetch_array()) :
 		?>
 			<div id="chat_data">

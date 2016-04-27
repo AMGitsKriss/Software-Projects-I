@@ -234,12 +234,12 @@
 		//post container tag
 		$results = "<div class=post-container>\n";
 
-		//Do we want an edit button on these posts?
-		$editLink = "";
-		if($editable == true){
-			$editLink = "<div class=edit><a onClick='editEntryForm(\"post".$row['postid']."\")' href='javascript:void(0);'>[Edit]</a></div>";
-		}
 		foreach($plainResults as $row){
+			//Do we want an edit button on these posts?
+			$editLink = "";
+			if($editable == true){
+				$editLink = "<div class=edit><a onClick='editEntryForm(\"post".$row['postid']."\")' href='javascript:void(0);'>[Edit]</a></div>";
+			}
 			//plainResults: $row['postid'] | $row['added'] | $row['name'] | $row['url'] | $row['owner']
 			//Formatting the information in plainResults.
 			//TODO make sure entryEditForm("postID") is properly excaped. 
@@ -304,19 +304,12 @@
 	function generateHeader($pageTitle, $loggedIn){
 		//Header HTML, along with the navigation HTML
 		//JQuery included (1.12.3)
-		$header = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n<html xmlns='http://www.w3.org/1999/xhtml'>\n<head>\n<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />\n<title>Operam - $pageTitle</title>\n<link rel='stylesheet' type='text/css' href='css/default.css'>\n  <script src='https://code.jquery.com/jquery-1.12.3.js'></script>\n<script src='javascript.js'></script>\n</head>\n<body>";
+		$header = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n<html xmlns='http://www.w3.org/1999/xhtml'>\n<head>\n<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />\n<title>Operam - $pageTitle</title>\n<link rel='stylesheet' type='text/css' href='css/default.css'>\n<script src='https://code.jquery.com/jquery-1.12.3.js'></script>\n<script src='javascript.js'></script>\n</head>\n<body>";
 		
 		//TODO - Call the navigation function here
-		if ($loggedIn){
-			$header .= file_get_contents('templates/navigation.html');
-		}
-		else {
-			$header .= file_get_contents('templates/navigation-signed-out.html');
-		}
+		$header .= file_get_contents('templates/navigation.html');
 		//TODO - Will this work without handing the fucntion the session?
-		if(isset($_SESSION['admin'])){
-			//$header .= file_get_contents('templates/adminNavigation.html');
-		}
+
 		return $header;
 	}
 ?>

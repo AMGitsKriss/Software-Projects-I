@@ -24,7 +24,7 @@
 
 "CREATE TABLE GroupPosts (postid INT, groupid VARCHAR(100), FOREIGN KEY (groupid) REFERENCES Groups(name), FOREIGN KEY (postid) REFERENCES Posts(postid))",
 
-"CREATE TABLE chat (id INT, name VARCHAR(100), msg VARCHAR(255), date TIMESTAMP CURRENT_TIMESTAMP)");
+"CREATE TABLE chat (id INT, name VARCHAR(100), msg VARCHAR(255), date TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
 
 	//Applying the sql
 	for($i = 0; $i < count($sql); $i++){

@@ -22,17 +22,17 @@
 			$private = isset($_POST['private']);
 			//If $private is 1 (true) leave it as 1, else set to 0 (false).
 			$private = ($private == 1) ? 1 : 0;
-			spit($private);
+			//spit($private);
 			$username = $_SESSION['username'];
 			$sql = "INSERT INTO Groups (name, private, owner) VALUES ('$new_group', '$private', '$username')";
 			$result = mysqli_query($conn, $sql);
 			if($result){
-				spit("A");
+				//spit("A");
 				addtoGroup($new_group, $username);
 				$output .= "<p>Group created successfully.</p>";
 			}
 			else {
-				spit("B");
+				//spit("B");
 				$output .= "<p>" . mysqli_error($conn) . "</p>";
 			}
 		}
@@ -43,7 +43,7 @@
 	}
 	else if(isset($_POST['join-group'])){
 		$join_group = mysqli_real_escape_string($conn, $_POST['new-group']);
-		spit($join_group);
+		//spit($join_group);
 		//If the group ISN'T private...
 		if(checkGroupPrivate($join_group) == FALSE){
 			addtoGroup($join_group, $username);
@@ -79,7 +79,7 @@
 		}
 		//Fail
 		else{
-			spit("Error: Could not remove " . $_SESSION['username'] . "From the group " . $group . ".");
+			//spit("Error: Could not remove " . $_SESSION['username'] . "From the group " . $group . ".");
 		}
 	}
 
@@ -123,12 +123,12 @@
 	else{
 		//TODO - List all of the groups the user is a member of.
 		if($_SESSION['admin']){
-			spit("Admin List");
+			//spit("Admin List");
 			//Get ALL groups
 			$sql = "SELECT DISTINCT owner, groupid FROM Groups INNER JOIN GroupMembers";
 		}
 		else {
-			spit("Normal List");
+			//spit("Normal List");
 			//Searched based on usename
 			$sql = "SELECT DISTINCT * FROM GroupMembers INNER JOIN Groups WHERE userid='$username' AND groupid=name";
 			//Select everything from groups where userid in GroupMember is paired with that groupid.
@@ -136,7 +136,7 @@
 		$result = mysqli_query($conn, $sql);
 		if($result === FALSE){
 			//Oops
-			spit( mysqli_error($conn) );
+			//spit( mysqli_error($conn) );
 		}
 		else {
 			while($row = mysqli_fetch_assoc($result)){
