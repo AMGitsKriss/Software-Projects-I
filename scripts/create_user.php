@@ -15,15 +15,15 @@
 		$hasher = new PasswordHash(8, false);
 		$password = "*";
 
-		$report = "<h2> Error: </h2>";
+		$report = false;
 
 		//If the password's DONT match, spit it back. 
 		if($_POST['password1'] !== $_POST['password2']){
-			$report .= "<p>Passwords don't match.</p>";
+			$report = '<p>Passwords do not match.</p>';
 		}
 		//Do a check to make sure address is an email.
 		else if(!validEmail($_POST['email'])){
-			$report .= "<p>Email not valid.</p>";
+			$report = '<p>Email not valid.</p>';
 		}
 		//If all fields are filled in appropriately
 		else if(strlen($_POST['password1'])>=6 && strlen($_POST['name'])>=4 && validEmail($_POST['email'])){
@@ -59,30 +59,34 @@
 			} 
 			//Found that username already
 			else if(checkUsername($username)){ //Username exists
-				$report .= "<p>That username is already in use.</p>";
-				echo $report;
+				$report = '<p>That username is already in use.</p>';
+				echo $report.;
 			}
 			//Email already exists
 			else if(checkEmail($email)){ //User has account
-				$report .= "<p>That email is already in use.</p>";
-				echo $report;
+				$report = '<p>That email is already in use.</p>';
+				echo $report.;
 			}
 			//Hashing was botched
 			else if(strlen($password) < 20){ //Password too short
-				$report .= "<p>Something went wrong.</p>";
-				echo $report;
+				$report = '<p>Something went wrong.</p>';
+				echo $report.;
 			}
 			$conn->close();
 		}
 		else if(strlen($_POST['username'])<4){
-			$report .= "<p>Username too short.</p>";
+			$report .= '<p>Username too short.</p>';
 		}
 		else if(strlen($_POST['password1'])<6){
-			$report .= "<p>Password too short.</p>";
+			$report .= '<p>Password too short.</p>';
 		}
 	}
 	//If not a post, go back up to index.php
 	else {
 		header("location: ../");
 	}
+
+if ($report){
+	print '<p>'.$report.'</p>';
+}
 ?>
