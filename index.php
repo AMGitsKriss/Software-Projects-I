@@ -1,17 +1,20 @@
 <?php 
-	//error_reporting(E_ALL);
-	//ini_set('display_errors', true);
-	
-	require("functions.php");
-	require("config/db_connect.php");
+	error_reporting(E_ALL);
+	ini_set('display_errors', true);
+	include_once("css/default.css");
+	require_once("functions.php");
+	require_once("config/db_connect.php");
 
 	session_start();
 
 	//Declare this now
 	$output = "";
+	if(isset($_SESSION['error'])){
+		//spit("Error statement");
+		$output .= $_SESSION['error'];
+	}
 //-----------------------------------------------
-	//TODO - I have no idea what's going on here. 
-	// If no page, go to home page, then if they're logged in include navigation? Then if not logged in go to login.php?
+	// If not logged in go to login.php?
 
 
 	if (!isset($_GET['page'])) 
@@ -47,7 +50,7 @@
 		break;
 	case 'login':
 		//Contains both the login and registration content
-		$output .= generateHeader("Sign in", false);
+		//$output .= generateHeader("Sign in", true);
 		include 'views/login.php';
 		break;
 	case 'logout' :
@@ -66,6 +69,10 @@
 	case 'friends' :
 		$output .= generateHeader("Friends", $_SESSION["login"]);
 		include 'views/friends.php';
+		break;
+	case 'chatApp' :
+		$output .= generateHeader("Chat", $_SESSION["login"]);
+		include 'views/chatApp.php';
 		break;
 	case '403' :
 		$output .= generateHeader("Forbidden", $_SESSION["login"]);

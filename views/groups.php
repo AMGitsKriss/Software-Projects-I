@@ -22,17 +22,17 @@
 			$private = isset($_POST['private']);
 			//If $private is 1 (true) leave it as 1, else set to 0 (false).
 			$private = ($private == 1) ? 1 : 0;
-			spit($private);
+			//spit($private);
 			$username = $_SESSION['username'];
 			$sql = "INSERT INTO Groups (name, private, owner) VALUES ('$new_group', '$private', '$username')";
 			$result = mysqli_query($conn, $sql);
 			if($result){
-				spit("A");
+				//spit("A");
 				addtoGroup($new_group, $username);
 				$output .= "<p>Group created successfully.</p>";
 			}
 			else {
-				spit("B");
+				//spit("B");
 				$output .= "<p>" . mysqli_error($conn) . "</p>";
 			}
 		}
@@ -43,7 +43,7 @@
 	}
 	else if(isset($_POST['join-group'])){
 		$join_group = mysqli_real_escape_string($conn, $_POST['new-group']);
-		spit($join_group);
+		//spit($join_group);
 		//If the group ISN'T private...
 		if(checkGroupPrivate($join_group) == FALSE){
 			addtoGroup($join_group, $username);
@@ -61,9 +61,9 @@
 	//If the user has clicked the leave group option.
 	if(isset($_POST['leave-group'])){
 		//Owner tries to leave.
-		if($_SESSION['username'] == getGroupOwner($group) && isset($_POST['new-owner'])){
+		if($_SESSION['username'] == getGroupOwner($group) && isset($_POST['newowner'])){
 			//Change the owner
-			$new_owner = $_POST['new-owner'];
+			$new_owner = $_POST['newowner'];
 			$username = $_SESSION['username'];
 			$sql = "UPDATE Groups SET owner='$new_owner' WHERE owner='$username'";
 			mysqli_query($conn, $sql);
@@ -79,9 +79,15 @@
 		}
 		//Fail
 		else{
-			spit("Error: Could not remove " . $_SESSION['username'] . "From the group " . $group . ".");
+			//spit("Error: Could not remove " . $_SESSION['username'] . "From the group " . $group . ".");
 		}
 	}
+
+	/*if(isset($_POST['setowner'])){
+		$sql = "UPDATE Groups SET owner='$_POST[newowner]' WHERE group=$_GET[group]'";
+		mysqli_query($conn, $sql);
+		mysqli_error($conn);
+	}*/
 
 	if(isset($_GET['group'])){
 		$group = $_GET['group']; 
@@ -101,12 +107,12 @@
 			if(checkGroupPrivate($group)){
 				$output .= file_get_contents("templates/add-remove-users.html");
 			}
-			$output .= "<form name='leave-group' method'post' action'var_host/groups'><label>Set new group admin:</label><input type='text' name='new-owner'><input type='submit' text='Leave Group'></form>";
+			$output .= "<form name='leave-group' method='post' action=''><label>Set new group admin:</label><input type='text' name='newowner'><input type='submit' value='Leave Group' name='setowner'></form>";
 		}
 		//If a gorup member, show dialogue
 		else if(getGroupMember($username, $group)){
 			//Everyone else then sees...
-			$output .= "<form name='leave-group' method'post' action'var_host/groups'><input type='submit' text='Leave Group'></form>";
+			$output .= "<form name='leave-group' method='post' action=''><input type='submit' text='Leave Group'></form>";
 		}
 
 		//Group is private?
@@ -123,12 +129,12 @@
 	else{
 		//TODO - List all of the groups the user is a member of.
 		if($_SESSION['admin']){
-			spit("Admin List");
+			//spit("Admin List");
 			//Get ALL groups
 			$sql = "SELECT DISTINCT owner, groupid FROM Groups INNER JOIN GroupMembers";
 		}
 		else {
-			spit("Normal List");
+			//spit("Normal List");
 			//Searched based on usename
 			$sql = "SELECT DISTINCT * FROM GroupMembers INNER JOIN Groups WHERE userid='$username' AND groupid=name";
 			//Select everything from groups where userid in GroupMember is paired with that groupid.
@@ -136,7 +142,7 @@
 		$result = mysqli_query($conn, $sql);
 		if($result === FALSE){
 			//Oops
-			spit( mysqli_error($conn) );
+			//spit( mysqli_error($conn) );
 		}
 		else {
 			while($row = mysqli_fetch_assoc($result)){

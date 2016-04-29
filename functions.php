@@ -194,17 +194,21 @@
 		}
 
 		//The title and link fields.
-		$html = "<div class='post'>\n<form action='' method='post'>\n<p><input type='text' name='title' placeholder='Post Title (Optional)'>\n<input type='text' name='url' placeholder='Post URL'>\n";
+		$html = "<div class='post'>\n<form action='' method='post'>\n
+				<p>
+				<input class='form-control' type='text' name='title' placeholder='Post Title (Optional)'>\n
+				<input class='form-control' type='text' name='url' placeholder='Post URL'>\n
+				";
 
 		//Generate an option list with the post destinations.
-		$html .= "<span class='option-container'><select name='postTo'>\n";
+		$html .= "<span class='option-container'><select class='form-control' name='postTo'>\n";
 		foreach($postTo as $option){
 			$html .= "<option value='$option[1]'>$option[0]$option[1] </option>\n";
 		}
 		$html .= "</select></span>\n";
 
 		//Submit button
-		$html .= "<input type='submit' name='postlink' value='Post'>\n</p>\n</form>\n</div>\n";
+		$html .= "<input class='btn btn-danger' type='submit' name='postlink' value='Post'>\n</p>\n</form>\n</div>\n";
 
 		return $html;
 	}
@@ -234,12 +238,12 @@
 		//post container tag
 		$results = "<div class=post-container>\n";
 
-		//Do we want an edit button on these posts?
-		$editLink = "";
-		if($editable == true){
-			$editLink = "<div class=edit><a onClick='editEntryForm(\"post".$row['postid']."\")' href='javascript:void(0);'>[Edit]</a></div>";
-		}
 		foreach($plainResults as $row){
+			//Do we want an edit button on these posts?
+			$editLink = "";
+			if($editable == true){
+				$editLink = "<div class=edit><a onClick='editEntryForm(\"post".$row['postid']."\")' href='javascript:void(0);'>[Edit]</a></div>";
+			}
 			//plainResults: $row['postid'] | $row['added'] | $row['name'] | $row['url'] | $row['owner']
 			//Formatting the information in plainResults.
 			//TODO make sure entryEditForm("postID") is properly excaped. 
@@ -283,9 +287,19 @@
 		$sql = "SELECT * FROM Users WHERE name='$username'";
 		$results = mysqli_query($conn, $sql);
 		$userDetails = mysqli_fetch_assoc($results);
+		
+		 while ($row = $results->fetch_assoc()) 
+		 {
+			 echo("dhcjdwshb");
+				$select .= "<img src='".$row['img']."' style='height: 100px;' />";
+			 
+		 }
 
 		//Present the account
-		$select = "<form method='post' action='var_host/account'>\n<label>Username:</label><p>$userDetails[name]</p>\n";
+		$select = "<form method='post' action='var_host/account' enctype='multipart/form-data'>\n<label>Username:</label><p>$userDetails[name]</p>\n";
+		
+		
+		$select .= "<input type='file' name='fileToUpload' id='fileToUpload'>";
 
 		//prepopulated email address field.
 		$select .="<label>Email Address:</label><p><input type='text' name='email' value='$userDetails[email]'></p>";
@@ -304,19 +318,12 @@
 	function generateHeader($pageTitle, $loggedIn){
 		//Header HTML, along with the navigation HTML
 		//JQuery included (1.12.3)
-		$header = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n<html xmlns='http://www.w3.org/1999/xhtml'>\n<head>\n<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />\n<title>Operam - $pageTitle</title>\n<link rel='stylesheet' type='text/css' href='css/default.css'>\n  <script src='https://code.jquery.com/jquery-1.12.3.js'></script>\n<script src='javascript.js'></script>\n</head>\n<body>";
+		$header = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n<html xmlns='http://www.w3.org/1999/xhtml'>\n<head>\n<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />\n<title>Operam - $pageTitle</title>\n<link rel='stylesheet' type='text/css' href='css/default.css'>\n<script src='https://code.jquery.com/jquery-1.12.3.js'></script>\n<script src='javascript.js'></script>\n</head>\n<body>";
 		
 		//TODO - Call the navigation function here
-		if ($loggedIn){
-			$header .= file_get_contents('templates/navigation.html');
-		}
-		else {
-			$header .= file_get_contents('templates/navigation-signed-out.html');
-		}
+		$header .= file_get_contents('templates/navigation.html');
 		//TODO - Will this work without handing the fucntion the session?
-		if(isset($_SESSION['admin'])){
-			//$header .= file_get_contents('templates/adminNavigation.html');
-		}
+
 		return $header;
 	}
 ?>

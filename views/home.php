@@ -5,8 +5,7 @@
 	$output .= getPostForm();
 
 	//User has posted a link
-	if(isset($_POST['postlink'])){
-		spit("getlink is set");
+	if(isset($_POST['postlink']) &&  isset($_POST['url'])){
 
 		$url = $_POST['url'];
 		$title = $_POST['title'];

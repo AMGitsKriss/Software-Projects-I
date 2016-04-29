@@ -18,7 +18,7 @@
 	//TODO Adonay/Kriss - Check to see if the user has a permission level of 1. If so, show them the admin UI.
 
 	// check if there was a POST request
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if (isset($_POST['login'])) {
 		//create the hasher
 		require("libs/PasswordHash.php");
 		$hasher = new PasswordHash(8, false);
@@ -69,6 +69,83 @@
 			}
 
 		// ------- END form processing code... -------
+		}
+	}
+	//Assuming this is a register submission
+	if(isset($_POST['register'])){
+
+		//Starting the Hasher, and declaring the password variable 
+		require("libs/PasswordHash.php");
+		$hasher = new PasswordHash(8, false);
+		$password = "*";
+
+		$output = generateHeader("Sign in", true);
+		$output .= file_get_contents('templates/login.html');
+		$output .= file_get_contents('templates/register.html');
+		$output .= "<h2> Error: </h2>";
+
+		//If the password's DONT match, spit it back. 
+		if($_POST['password1'] !== $_POST['password2']){
+			$output .= "<p>Passwords don't match.</p>";
+		}
+		//Do a check to make sure address is an email.
+		else if(!validEmail($_POST['email'])){
+			$output .= "<p>Email not valid.</p>";
+		}
+		//If all fields are filled in appropriately
+		else if(strlen($_POST['password1'])>=6 && strlen($_POST['name'])>=4 && validEmail($_POST['email'])){
+			$email = $_POST['email'];
+			$username = $_POST['name'];
+			$password = $_POST['password1'];
+			// To protect MySQL injection for Security purpose
+			$username = stripslashes($username);
+			
+			$email = $conn->real_escape_string($email);
+			$username = $conn->real_escape_string($username);
+			$password = $conn->real_escape_string($password);
+			
+			if(strlen($password) > 72){
+				die("Password must be 72 characters or less.");
+			}
+			
+			$password = $hasher->HashPassword($password);
+
+			//Minimum hash length is 20 characters. If less, something's broken.
+			if(strlen($password) >= 20 ){	
+				//Hashing has worked.
+				//Add the entry and go to the login page.
+				$sql = "INSERT INTO Users (name, password, email) VALUES ('$username', '$password', '$email')";
+				$query = mysqli_query($conn, $sql);
+				if(!$query){
+					echo $conn->error;
+					
+				}
+				else{
+					header("location: ../soft");
+				}
+			} 
+			//Found that username already
+			else if(checkUsername($username)){ //Username exists
+				$output .= "<p>That username is already in use.</p>";
+				echo $output;
+			}
+			//Email already exists
+			else if(checkEmail($email)){ //User has account
+				$output .= "<p>That email is already in use.</p>";
+				echo $output;
+			}
+			//Hashing was botched
+			else if(strlen($password) < 20){ //Password too short
+				$output .= "<p>Something went wrong.</p>";
+				echo $output;
+			}
+			$conn->close();
+		}
+		else if(strlen($_POST['name'])<4){#
+			$output .= "<p>Username too short.</p>";
+		}
+		else if(strlen($_POST['password1'])<6){
+			$output .= "<p>Password too short.</p>";
 		}
 	}
 ?>
