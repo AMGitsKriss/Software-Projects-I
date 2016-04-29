@@ -196,7 +196,7 @@
 		//The title and link fields.
 		$html = "<div class='post'>\n<form action='' method='post'>\n
 				<p>
-				<input class='form-control' type='text' name='title' placeholder='Post Title (Optional)'>\n
+				<input required class='form-control' type='text' name='title' placeholder='Post Title (Optional)'>\n
 				<input class='form-control' type='text' name='url' placeholder='Post URL'>\n
 				";
 

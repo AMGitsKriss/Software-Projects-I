@@ -13,9 +13,9 @@ function formatDate($date){
 	$run = $conn->query($query);
 	while($row = $run->fetch_array()) :
 		?>
-			<div id="chat_data" style='background:grey'>
+			<div id="chat_data" style='background:lightgrey'>
 				<span style="color:brown;"><?php echo $row['name']; ?></span> :
 				<span style="color:black;"><?php echo $row['msg']; ?></span>
-				<span style="color:blue; float:right;"><?php echo formatDate($row['date']); ?></span>
+				<span style="color:blue; float:right;"><?php echo $row['date']; ?></span>
 			</div>
 		<?php endwhile;}?>

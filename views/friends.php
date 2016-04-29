@@ -15,8 +15,6 @@ $action = $_SERVER["PHP_SELF"]."?page=search";
 // append form HTML to output string
 $output .= $form_html;
 
-$output .= "<h2>Friends</h2>";
-
 // ------- START form processing code... -------
 
 // define variables and set to empty values
@@ -49,7 +47,14 @@ $result = mysqli_query($conn, $sql);
 	    
 	    $output .= "<tbody>";
 	    // fetch associative array
+		$rowcount=mysqli_num_rows($result);
+		if($rowcount===0)
+		{
+			$output .="The user ".$clean_search." doesn't exist";
+		}
+		$output .= "<h2>Friends</h2>";
 	    while ($row = mysqli_fetch_assoc($result)) {
+			
 			$temp = $row['name'];
 		if($temp==$search){
 		$output .= "<tr>";

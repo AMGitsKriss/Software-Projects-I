@@ -49,8 +49,6 @@ if ($_FILES["fileToUpload"]["size"] > 50000000) {
 	$imgcheck = false;
 }
 
-//$target_file = $target_dir .The file ". basename( $_FILES["fileToUpload"]["name"]);
-//echo "".$target_dir .The file ". basename( $_FILES["fileToUpload"]["name"])."";
 
 // Allow certain file formats
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
