@@ -65,7 +65,9 @@
 				header('Location: '.$host);
 			}
 			else{
-				spit("Login failed.");
+
+				//changed from spit to echo. maybe add CSS?
+				echo '<p>!!Login failed!! Please try again</p>';
 			}
 
 		// ------- END form processing code... -------
