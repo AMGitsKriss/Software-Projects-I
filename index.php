@@ -2,6 +2,7 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', true);
 	include_once("css/default.css");
+
 	require_once("functions.php");
 	require_once("config/db_connect.php");
 
@@ -51,6 +52,7 @@
 	case 'login':
 		//Contains both the login and registration content
 		//$output .= generateHeader("Sign in", true);
+
 		include 'views/login.php';
 		break;
 	case 'logout' :

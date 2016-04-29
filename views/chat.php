@@ -1,12 +1,15 @@
 <?php 
 include_once('../config/db_connect.php');
+
 session_start();
+
 function formatDate($date){
 	return date('g:i a', strtotime($date));
 }
 
 		if(isset(($_SESSION['group']))&&($_SESSION['group']!=="")){
 	$query = "SELECT * FROM chat WHERE togroup = '$_SESSION[group]' ORDER BY id DESC";
+
 	$run = $conn->query($query);
 	while($row = $run->fetch_array()) :
 		?>

@@ -121,7 +121,9 @@
 					
 				}
 				else{
-					header("location: ../soft");
+
+					header("location: $host");
+
 				}
 			} 
 			//Found that username already
